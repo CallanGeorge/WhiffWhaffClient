@@ -1,0 +1,11 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`UserSignupPage.t Layout has header 1`] = `
+<div>
+  <h1
+    role="heading"
+  >
+    UserSignupPage
+  </h1>
+</div>
+`;
