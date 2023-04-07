@@ -1,6 +1,7 @@
 import css from "./popup.module.css";
 import { useRef, useState } from "react";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 export const UserSignupPage = () => {
   const nameRef = useRef<HTMLInputElement>(null);
@@ -11,19 +12,32 @@ export const UserSignupPage = () => {
   const [error, setError] = useState("");
   const [pending, setPending] = useState(false);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const navigate = useNavigate();
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
     if (!signUp) {
-      axios
-        .post("http://localhost:8080/api/v1/users", {
-          auth: {
-            username: nameRef.current!.value,
-            password: passwordRef.current!.value,
-          },
+      const message = await axios
+        .post(
+          "http://localhost:8080/api/v1/login",
+          {},
+          {
+            auth: {
+              username: nameRef.current!.value,
+              password: passwordRef.current!.value,
+            },
+          }
+        )
+        .then((res) => {
+          setPending(false);
+          console.log(res);
         })
-        .then(() => setPending(false))
         .catch((err) => setError("Error loggin in"));
+
+      console.log(message);
+      console.log(nameRef.current!.value);
+      console.log(passwordRef.current!.value);
     }
 
     if (signUp) {
@@ -33,7 +47,7 @@ export const UserSignupPage = () => {
         ? setError("Passwords do not match")
         : (() => setPending(true)) &&
           (() => setError("")) &&
-          axios
+          (await axios
             .post(
               "http://localhost:8080/api/v1/users",
 
@@ -43,7 +57,7 @@ export const UserSignupPage = () => {
               }
             )
             .then(() => setPending(false))
-            .catch((err) => setError("Username already in use."));
+            .catch((err) => setError("Username already in use.")));
     }
   };
 
