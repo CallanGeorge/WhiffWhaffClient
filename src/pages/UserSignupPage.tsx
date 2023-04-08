@@ -58,7 +58,10 @@ export const UserSignupPage = () => {
                 password: passwordRef.current!.value,
               }
             )
-            .then(() => setPending(false))
+            .then((res) => {
+              setPending(false);
+              navigate("/"); // will need to redirect to login after sign up - doesnt work not cause need to refactor
+            })
             .catch((err) => setError("Username already in use.")));
     }
   };
