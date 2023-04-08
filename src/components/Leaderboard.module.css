@@ -1,0 +1,11 @@
+.leaderboard {
+  background-color: white;
+  width: 90%;
+  margin: auto;
+}
+
+.leaderboardUser {
+  display: grid;
+  grid-template-columns: 1fr 3fr 1fr;
+  padding: 20px;
+}

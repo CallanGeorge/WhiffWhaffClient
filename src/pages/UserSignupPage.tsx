@@ -14,11 +14,13 @@ export const UserSignupPage = () => {
 
   const navigate = useNavigate();
 
+  error === "none" && navigate("/home");
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
     if (!signUp) {
-      const message = await axios
+      await axios
         .post(
           "http://localhost:8080/api/v1/login",
           {},
@@ -31,13 +33,13 @@ export const UserSignupPage = () => {
         )
         .then((res) => {
           setPending(false);
+          setError("none");
           console.log(res);
+          const data = res.data.message;
+
+          localStorage.setItem("profile", JSON.stringify({ data }));
         })
         .catch((err) => setError("Error loggin in"));
-
-      console.log(message);
-      console.log(nameRef.current!.value);
-      console.log(passwordRef.current!.value);
     }
 
     if (signUp) {

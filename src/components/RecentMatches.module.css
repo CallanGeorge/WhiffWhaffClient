@@ -1,0 +1,23 @@
+.recentMatches {
+  width: 90%;
+  margin: auto;
+  background-color: white;
+}
+
+.match {
+  display: grid;
+  grid-template-columns: 3fr 1fr 3fr;
+  text-align: center;
+  height: 50px;
+}
+
+.winner {
+  background-color: greenyellow;
+  padding: 15px;
+}
+
+.loser {
+  background-color: red;
+  place-items: center;
+  padding: 15px;
+}
