@@ -35,7 +35,7 @@ export const UserSignupPage = () => {
           setPending(false);
           setError("none");
           console.log(res);
-          const data = res.data.message;
+          const data = res.data;
 
           localStorage.setItem("profile", JSON.stringify({ data }));
         })

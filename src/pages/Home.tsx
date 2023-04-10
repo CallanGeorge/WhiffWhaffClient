@@ -12,7 +12,7 @@ export const Home = () => {
     //@ts-ignore
     const item = JSON.parse(localStorage.getItem("profile"));
     // profile from local storage returns differently constructed object depending on if created in sign up or sign in
-    item ? setUser(item.data) : setUser("");
+    item ? setUser(item.data.username) : setUser("");
   }, []);
   return (
     <div className={css.main}>
