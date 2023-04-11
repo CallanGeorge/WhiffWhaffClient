@@ -1,5 +1,5 @@
 import css from "./UserSignupPage.module.css";
-import { useRef, useState } from "react";
+import { useRef, useState, useEffect } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
@@ -13,6 +13,18 @@ export const UserSignupPage = () => {
   const [pending, setPending] = useState(false);
 
   const navigate = useNavigate();
+
+  const [user, setUser] = useState("");
+
+  useEffect(() => {
+    //@ts-ignore
+    const item = JSON.parse(localStorage.getItem("profile"));
+    // profile from local storage returns differently constructed object depending on if created in sign up or sign in
+    if (item) {
+      setUser(item.data.username);
+      navigate("/home");
+    }
+  }, []);
 
   error === "none" && navigate("/home");
 

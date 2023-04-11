@@ -4,15 +4,17 @@ import RecentMatches from "../components/RecentMatches";
 import { useEffect, useState } from "react";
 
 import css from "./Home.module.css";
+import { useNavigate } from "react-router-dom";
 
 export const Home = () => {
   const [user, setUser] = useState("");
+  const navigate = useNavigate();
 
   useEffect(() => {
     //@ts-ignore
     const item = JSON.parse(localStorage.getItem("profile"));
     // profile from local storage returns differently constructed object depending on if created in sign up or sign in
-    item ? setUser(item.data.username) : setUser("");
+    item ? setUser(item.data.username) : navigate("/");
   }, []);
   return (
     <div className={css.main}>
