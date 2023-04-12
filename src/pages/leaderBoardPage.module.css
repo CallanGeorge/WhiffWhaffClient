@@ -14,6 +14,12 @@
   margin: auto;
 }
 
+.back {
+  position: absolute;
+  top: 5%;
+  left: 5%;
+}
+
 .leaderboardUser {
   display: grid;
   grid-template-columns: 1fr 3fr 1fr;

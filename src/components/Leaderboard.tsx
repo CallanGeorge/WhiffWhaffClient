@@ -5,24 +5,30 @@ import { Link } from "react-router-dom";
 
 const Leaderboard = () => {
   const [data, setData] = useState([]);
+  const [error, setError] = useState("");
 
   useEffect(() => {
     axios
       .get("http://localhost:8080/api/v1/users?page=0&size=5")
       .then((response) => {
         setData(response.data.content);
-      });
+      })
+      .catch((error) => setError(error.message));
   }, []);
 
   return (
     <div className={css.leaderboard}>
-      {data.map((d: any) => (
-        <div className={css.leaderboardUser}>
-          <div>{d!.id}</div>
-          <div>{d!.username}</div>
-          <div>100</div>
-        </div>
-      ))}
+      {data ? (
+        data.map((d: any) => (
+          <div className={css.leaderboardUser}>
+            <div>{d!.id}</div>
+            <div>{d!.username}</div>
+            <div>100</div>
+          </div>
+        ))
+      ) : (
+        <span>{error}</span>
+      )}
       <div className={css.view}>
         <Link to="/leaderboard">
           <h2>View Full leaderboard</h2>

@@ -2,30 +2,44 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 
 import css from "./leaderBoardPage.module.css";
+import { Link } from "react-router-dom";
 
 export const LeaderBoardPage = () => {
   const [data, setData] = useState([]);
+  const [error, setError] = useState("");
 
   useEffect(() => {
-    axios.get("http://localhost:8080/api/v1/users").then((response) => {
-      setData(response.data.content);
-      console.log(response);
-    });
+    axios
+      .get("http://localhost:8080/api/v1/users")
+      .then((response) => {
+        setData(response.data.content);
+        console.log(response);
+      })
+      .catch((error) => setError(error.message));
   }, []);
 
   return (
-    <main className={css.main}>
-      <h1>LeaderBoard</h1>
-      <div className={css.leaderboard}>
-        {data.map((d: any) => (
-          <div className={css.leaderboardUser}>
-            <div>{d!.id}</div>
-            <div>{d!.username}</div>
-            <div>100</div>
-          </div>
-        ))}
-      </div>
-    </main>
+    <>
+      <Link to="/home" className={css.back}>
+        Back Home
+      </Link>
+      <main className={css.main}>
+        <h1>LeaderBoard</h1>
+        <div className={css.leaderboard}>
+          {data ? (
+            data.map((d: any) => (
+              <div className={css.leaderboardUser}>
+                <div>{d!.id}</div>
+                <div>{d!.username}</div>
+                <div>100</div>
+              </div>
+            ))
+          ) : (
+            <span>{error}</span>
+          )}
+        </div>
+      </main>
+    </>
   );
 };
 
