@@ -17,7 +17,7 @@ export const Home = () => {
     item ? setUser(item.data.username) : navigate("/");
   }, []);
   return (
-    <div className={css.main}>
+    <main className={css.main}>
       <h1>Welcome to xDesign ping pong</h1>
       <span>Signed in as: {user}</span>
       <div className={css.box}>
@@ -32,7 +32,7 @@ export const Home = () => {
         <h2>Recent Matches</h2>
         <RecentMatches />
       </div>
-    </div>
+    </main>
   );
 };
 
