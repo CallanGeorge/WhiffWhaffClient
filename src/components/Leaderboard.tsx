@@ -22,7 +22,9 @@ const Leaderboard = () => {
         data.map((d: any) => (
           <div className={css.leaderboardUser}>
             <div>{d!.id}</div>
-            <div>{d!.username}</div>
+            <div>
+              <Link to={`/${d!.username}`}>{d!.username}</Link>
+            </div>
             <div>100</div>
           </div>
         ))
