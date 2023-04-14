@@ -11,6 +11,8 @@ interface user {
 
 const UserPage = () => {
   const [data, setData] = useState<user>();
+  //@ts-ignore
+  const item = JSON.parse(localStorage.getItem("profile"));
 
   const { username } = useParams();
   console.log(username);
@@ -24,6 +26,14 @@ const UserPage = () => {
       });
   }, []);
 
+  const handleChallenge = () => {
+    axios.post(`http://localhost:8080/api/v1/matches`, {
+      player1: item.data.username,
+      player2: username,
+      dateTime: "6am tomorrow",
+    });
+  };
+
   return (
     <>
       <Link to="/home" className={css.back}>
@@ -32,6 +42,9 @@ const UserPage = () => {
       <main className={css.main}>
         <h3>{data?.id}</h3>
         <h2>{data?.username}</h2>
+        <button type="button" onClick={handleChallenge}>
+          Challenge
+        </button>
       </main>
     </>
   );

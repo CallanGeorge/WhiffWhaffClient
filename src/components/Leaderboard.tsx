@@ -16,6 +16,8 @@ const Leaderboard = () => {
       .catch((error) => setError(error.message));
   }, []);
 
+  console.log(data);
+
   return (
     <div className={css.leaderboard}>
       {data ? (
@@ -25,7 +27,7 @@ const Leaderboard = () => {
             <div>
               <Link to={`/${d!.username}`}>{d!.username}</Link>
             </div>
-            <div>100</div>
+            <div>{d!.score}</div>
           </div>
         ))
       ) : (
