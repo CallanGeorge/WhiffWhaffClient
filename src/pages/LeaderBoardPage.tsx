@@ -33,7 +33,7 @@ export const LeaderBoardPage = () => {
                 <div>
                   <Link to={`/${d!.username}`}>{d!.username}</Link>
                 </div>
-                <div>100</div>
+                <div>{d!.score}</div>
               </div>
             ))
           ) : (
