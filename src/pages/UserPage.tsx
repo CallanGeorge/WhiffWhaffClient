@@ -2,6 +2,8 @@ import { useState, useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
 import axios from "axios";
 
+import EventsBlock from "../components/EventsBlock";
+
 import css from "./UserPage.module.css";
 
 interface user {
@@ -45,6 +47,11 @@ const UserPage = () => {
         <button type="button" onClick={handleChallenge}>
           Challenge
         </button>
+        {item.data.username === username && (
+          <>
+            <h2>Invites</h2> <EventsBlock />
+          </>
+        )}
       </main>
     </>
   );

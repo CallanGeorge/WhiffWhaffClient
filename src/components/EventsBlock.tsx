@@ -14,14 +14,36 @@ const EventsBlock = () => {
       .then((response) => setMatches(response.data));
   }, []);
 
+  const handleAccept = (e: any) => {
+    const id = Number(e.target.id);
+
+    axios.put(`http://localhost:8080/api/v1/matches/${id}`);
+  };
+
   return (
     <div className={css.container}>
       {!matches ? (
         <h3>There are currently no upcoming events</h3>
       ) : (
         matches.map((m: any) => (
-          <div>
-            <h1>{m?.player2}</h1>{" "}
+          <div className={css.invite}>
+            <div className={css.players}>
+              <span>{m!.player1}</span> <span>challenged</span>{" "}
+              <span>{m!.player2}</span>
+            </div>
+            <div className={css.time}>{m!.dateTime} </div>
+            <div className={m!.accepted ? css.accepted : css.pending}>
+              pending
+              {item.data.username === m!.player2 && m!.accepted === false && (
+                <button
+                  id={m!.id}
+                  type="button"
+                  onClick={(e) => handleAccept(e)}
+                >
+                  Accept
+                </button>
+              )}
+            </div>
           </div>
         ))
       )}
