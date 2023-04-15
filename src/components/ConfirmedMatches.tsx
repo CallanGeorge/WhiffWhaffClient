@@ -2,15 +2,16 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 
 import css from "./EventsBlock.module.css";
+import { Link } from "react-router-dom";
 
-const EventsBlock = () => {
+const ConfirmedMatches = () => {
   const [matches, setMatches] = useState<any>([]);
   //@ts-ignore
   const item = JSON.parse(localStorage.getItem("profile"));
 
   useEffect(() => {
     axios
-      .get(`http://localhost:8080/api/v1/invites/${item.data.username}`)
+      .get(`http://localhost:8080/api/v1/matches/${item.data.username}`)
       .then((response) => setMatches(response.data));
   }, []);
 
@@ -33,16 +34,9 @@ const EventsBlock = () => {
             </div>
             <div className={css.time}>{m!.dateTime} </div>
             <div className={m!.accepted ? css.accepted : css.pending}>
-              pending
-              {item.data.username === m!.player2 && m!.accepted === false && (
-                <button
-                  id={m!.id}
-                  type="button"
-                  onClick={(e) => handleAccept(e)}
-                >
-                  Accept
-                </button>
-              )}
+              <button type="button">
+                <Link to={`/match/${m!.id}`}>I have played this game</Link>{" "}
+              </button>
             </div>
           </div>
         ))
@@ -51,4 +45,4 @@ const EventsBlock = () => {
   );
 };
 
-export default EventsBlock;
+export default ConfirmedMatches;

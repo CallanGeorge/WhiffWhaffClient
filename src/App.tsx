@@ -3,6 +3,7 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { Home } from "./pages/Home";
 import { LeaderBoardPage } from "./pages/LeaderBoardPage";
 import UserPage from "./pages/UserPage";
+import MatchPage from "./pages/MatchPage";
 
 function App() {
   return (
@@ -12,6 +13,7 @@ function App() {
         <Route path="/home" element={<Home />} />
         <Route path="/leaderboard" element={<LeaderBoardPage />} />
         <Route path="/:username" element={<UserPage />} />
+        <Route path="/match/:id" element={<MatchPage />} />
       </Routes>
     </BrowserRouter>
   );

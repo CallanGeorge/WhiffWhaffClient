@@ -5,6 +5,7 @@ import axios from "axios";
 import EventsBlock from "../components/EventsBlock";
 
 import css from "./UserPage.module.css";
+import ConfirmedMatches from "../components/ConfirmedMatches";
 
 interface user {
   id: string;
@@ -49,7 +50,7 @@ const UserPage = () => {
         </button>
         {item.data.username === username && (
           <>
-            <h2>Invites</h2> <EventsBlock />
+            <h2>Invites</h2> <EventsBlock /> <ConfirmedMatches />
           </>
         )}
       </main>

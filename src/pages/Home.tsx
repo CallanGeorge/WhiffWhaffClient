@@ -1,10 +1,10 @@
-import EventsBlock from "../components/EventsBlock";
+import ConfirmedMatches from "../components/ConfirmedMatches";
 import Leaderboard from "../components/Leaderboard";
 import RecentMatches from "../components/RecentMatches";
 import { useEffect, useState } from "react";
 
 import css from "./Home.module.css";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 export const Home = () => {
   const [user, setUser] = useState("");
@@ -19,10 +19,12 @@ export const Home = () => {
   return (
     <main className={css.main}>
       <h1>Welcome to xDesign ping pong</h1>
-      <span>Signed in as: {user}</span>
+      <span>
+        Signed in as: <Link to={`/${user}`}>{user}</Link>
+      </span>
       <div className={css.box}>
         <h2>Upcoming Events</h2>
-        <EventsBlock />
+        <ConfirmedMatches />
       </div>
       <div className={css.box}>
         <h2>Leaderboard</h2>
