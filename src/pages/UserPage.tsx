@@ -10,10 +10,11 @@ import ConfirmedMatches from "../components/ConfirmedMatches";
 interface user {
   id: string;
   username: string;
+  score: Number;
 }
 
 const UserPage = () => {
-  const [data, setData] = useState<user>();
+  const [data, setData] = useState<any>();
   //@ts-ignore
   const item = JSON.parse(localStorage.getItem("profile"));
 
@@ -45,6 +46,7 @@ const UserPage = () => {
       <main className={css.main}>
         <h3>{data?.id}</h3>
         <h2>{data?.username}</h2>
+        <h3>{data?.score}</h3>
         <button type="button" onClick={handleChallenge}>
           Challenge
         </button>
