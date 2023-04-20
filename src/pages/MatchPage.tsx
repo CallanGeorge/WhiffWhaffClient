@@ -6,6 +6,7 @@ import css from "./UserPage.module.css";
 
 const MatchPage = () => {
   const [data, setData] = useState<any>();
+  const [voted, setVoted] = useState<any>(false);
   //@ts-ignore
   const item = JSON.parse(localStorage.getItem("profile"));
 
@@ -24,14 +25,16 @@ const MatchPage = () => {
         vote: data!.player1,
         user: item.data.username,
       })
-      .then((res) => console.log(res));
+      .then(() => setVoted(true));
   };
 
   const p2WinHandler = () => {
-    axios.put(`http://localhost:8080/api/v1/result/${id}`, {
-      vote: data!.player2,
-      user: item.data.username,
-    });
+    axios
+      .put(`http://localhost:8080/api/v1/result/${id}`, {
+        vote: data!.player2,
+        user: item.data.username,
+      })
+      .then(() => setVoted(true));
   };
 
   return (
@@ -50,7 +53,8 @@ const MatchPage = () => {
           {(item.data.username === data?.player2 &&
             data?.player2Voted === true) ||
           (item.data.username === data?.player1 &&
-            data?.player1Voted === true) ? (
+            data?.player1Voted === true) ||
+          voted === true ? (
             <span>Waiting for the other player to vote</span>
           ) : (
             <>
