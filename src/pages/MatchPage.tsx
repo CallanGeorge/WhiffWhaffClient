@@ -54,7 +54,7 @@ const MatchPage = () => {
             data?.player2Voted === true) ||
           (item.data.username === data?.player1 &&
             data?.player1Voted === true) ||
-          voted === true ? (
+          voted === true ? ( // last change here
             <span>Waiting for the other player to vote</span>
           ) : (
             <>
