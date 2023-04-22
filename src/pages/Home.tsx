@@ -18,7 +18,7 @@ export const Home = () => {
   }, []);
   return (
     <main className={css.main}>
-      <h1>Welcome to xDesign ping pong</h1>
+      <h1>xDesign Whiff Whaff</h1>
       <span>
         Signed in as: <Link to={`/${user}`}>{user}</Link>
       </span>

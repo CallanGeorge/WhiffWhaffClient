@@ -28,6 +28,12 @@ const UserPage = () => {
         setData(response.data);
         console.log(data);
       });
+
+    axios
+      .get(`http://localhost:8080/api/v1/final-matches/${username}`)
+      .then((response) => {
+        console.log(response);
+      });
   }, []);
 
   const handleChallenge = () => {
