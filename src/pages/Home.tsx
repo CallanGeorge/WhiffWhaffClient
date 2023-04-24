@@ -40,7 +40,6 @@ export const Home = () => {
         <Leaderboard />
       </div>
       <div className={css.box}>
-        <h2>Recent Matches</h2>
         <RecentMatches matches={matches} />
       </div>
     </main>

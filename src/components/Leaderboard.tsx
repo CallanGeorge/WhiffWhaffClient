@@ -16,8 +16,6 @@ const Leaderboard = () => {
       .catch((error) => setError(error.message));
   }, []);
 
-  console.log(data);
-
   return (
     <div className={css.leaderboard}>
       {data ? (
