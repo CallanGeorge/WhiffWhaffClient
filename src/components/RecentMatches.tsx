@@ -2,17 +2,11 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import css from "./RecentMatches.module.css";
 
-const RecentMatches = () => {
-  const [matches, setMatches] = useState<any>([]);
+interface RecentMatchesProps {
+  matches?: any;
+}
 
-  useEffect(() => {
-    axios
-      .get(`http://localhost:8080/api/v1/all-matches?page=0&size=5`)
-      .then((response) => {
-        console.log(response.data.content);
-        setMatches(response.data.content);
-      });
-  }, []);
+const RecentMatches = ({ matches }: RecentMatchesProps) => {
   return (
     <div className={css.recentMatches}>
       {matches ? (

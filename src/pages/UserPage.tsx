@@ -15,6 +15,7 @@ interface user {
 
 const UserPage = () => {
   const [data, setData] = useState<any>();
+  const [played, setPlayed] = useState<any>();
   //@ts-ignore
   const item = JSON.parse(localStorage.getItem("profile"));
 
@@ -32,7 +33,7 @@ const UserPage = () => {
     axios
       .get(`http://localhost:8080/api/v1/final-matches/${username}`)
       .then((response) => {
-        console.log(response);
+        setPlayed(response.data);
       });
   }, []);
 
