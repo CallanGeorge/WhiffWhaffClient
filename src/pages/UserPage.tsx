@@ -6,6 +6,7 @@ import EventsBlock from "../components/EventsBlock";
 
 import css from "./UserPage.module.css";
 import ConfirmedMatches from "../components/ConfirmedMatches";
+import RecentMatches from "../components/RecentMatches";
 
 interface user {
   id: string;
@@ -27,7 +28,6 @@ const UserPage = () => {
       .get(`http://localhost:8080/api/v1/users/${username}`)
       .then((response) => {
         setData(response.data);
-        console.log(data);
       });
 
     axios
@@ -62,6 +62,8 @@ const UserPage = () => {
             <h2>Invites</h2> <EventsBlock /> <ConfirmedMatches />
           </>
         )}
+
+        <RecentMatches matches={played} />
       </main>
     </>
   );

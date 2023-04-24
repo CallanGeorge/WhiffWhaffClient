@@ -1,7 +1,11 @@
 .recentMatches {
   width: 90%;
-  margin: auto;
+
   background-color: white;
+}
+
+.title {
+  width: 80%;
 }
 
 .match {

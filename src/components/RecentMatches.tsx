@@ -8,27 +8,30 @@ interface RecentMatchesProps {
 
 const RecentMatches = ({ matches }: RecentMatchesProps) => {
   return (
-    <div className={css.recentMatches}>
-      {matches ? (
-        matches.map((match: any) => (
-          <div className={css.match}>
-            <div className={css.winner}>
-              {match?.player1 === match?.winner
-                ? match?.player1
-                : match?.player2}
+    <>
+      <h3 className={css.title}>Recent games</h3>
+      <div className={css.recentMatches}>
+        {matches ? (
+          matches.map((match: any) => (
+            <div className={css.match}>
+              <div className={css.winner}>
+                {match?.player1 === match?.winner
+                  ? match?.player1
+                  : match?.player2}
+              </div>
+              <div>vs</div>
+              <div className={css.loser}>
+                {match?.player1 === match?.winner
+                  ? match?.player2
+                  : match?.player1}{" "}
+              </div>{" "}
             </div>
-            <div>vs</div>
-            <div className={css.loser}>
-              {match?.player1 === match?.winner
-                ? match?.player2
-                : match?.player1}{" "}
-            </div>{" "}
-          </div>
-        ))
-      ) : (
-        <span>No matches to show</span>
-      )}
-    </div>
+          ))
+        ) : (
+          <span>No matches to show</span>
+        )}
+      </div>
+    </>
   );
 };
 
