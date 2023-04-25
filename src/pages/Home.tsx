@@ -32,11 +32,9 @@ export const Home = () => {
         Signed in as: <Link to={`/${user}`}>{user}</Link>
       </span>
       <div className={css.box}>
-        <h2>Upcoming Events</h2>
         <ConfirmedMatches />
       </div>
       <div className={css.box}>
-        <h2>Leaderboard</h2>
         <Leaderboard />
       </div>
       <div className={css.box}>

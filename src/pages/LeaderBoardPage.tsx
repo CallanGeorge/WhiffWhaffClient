@@ -13,7 +13,6 @@ export const LeaderBoardPage = () => {
       .get("http://localhost:8080/api/v1/users")
       .then((response) => {
         setData(response.data.content);
-        console.log(response);
       })
       .catch((error) => setError(error.message));
   }, []);
@@ -27,9 +26,9 @@ export const LeaderBoardPage = () => {
         <h1>LeaderBoard</h1>
         <div className={css.leaderboard}>
           {data ? (
-            data.map((d: any) => (
-              <div className={css.leaderboardUser}>
-                <div>{d!.id}</div>
+            data.map((d: any, i: any) => (
+              <div className={css.leaderboardUser} key={i}>
+                <div>{i + 1}</div>
                 <div>
                   <Link to={`/${d!.username}`}>{d!.username}</Link>
                 </div>

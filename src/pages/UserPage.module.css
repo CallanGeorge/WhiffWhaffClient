@@ -1,11 +1,16 @@
 .main {
   max-width: 700px;
-  height: 100vh;
+  height: 100%;
   background-color: green;
   margin: auto;
   display: flex;
   flex-direction: column;
   align-items: center;
+  min-height: 100vh;
+}
+
+.blocks {
+  width: 90%;
 }
 
 .back {

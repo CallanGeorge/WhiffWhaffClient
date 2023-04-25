@@ -9,11 +9,11 @@ interface RecentMatchesProps {
 const RecentMatches = ({ matches }: RecentMatchesProps) => {
   return (
     <>
-      <h3 className={css.title}>Recent games</h3>
+      <h2 className={css.title}>Recent games</h2>
       <div className={css.recentMatches}>
         {matches ? (
-          matches.map((match: any) => (
-            <div className={css.match}>
+          matches.map((match: any, i: any) => (
+            <div className={css.match} key={i}>
               <div className={css.winner}>
                 {match?.player1 === match?.winner
                   ? match?.player1

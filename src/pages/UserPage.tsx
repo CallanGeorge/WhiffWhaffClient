@@ -21,7 +21,6 @@ const UserPage = () => {
   const item = JSON.parse(localStorage.getItem("profile"));
 
   const { username } = useParams();
-  console.log(username);
 
   useEffect(() => {
     axios
@@ -41,7 +40,7 @@ const UserPage = () => {
     axios.post(`http://localhost:8080/api/v1/matches`, {
       player1: item.data.username,
       player2: username,
-      dateTime: "6am tomorrow",
+      // dateTime: "6am tomorrow",
     });
   };
 
@@ -51,16 +50,18 @@ const UserPage = () => {
         Back Home
       </Link>
       <main className={css.main}>
-        <h3>{data?.id}</h3>
         <h2>{data?.username}</h2>
         <h3>{data?.score}</h3>
-        <button type="button" onClick={handleChallenge}>
-          Challenge
-        </button>
+
+        {item.data.username !== username && (
+          <button type="button" onClick={handleChallenge}>
+            Challenge
+          </button>
+        )}
         {item.data.username === username && (
-          <>
+          <div className={css.blocks}>
             <h2>Invites</h2> <EventsBlock /> <ConfirmedMatches />
-          </>
+          </div>
         )}
 
         <RecentMatches matches={played} />

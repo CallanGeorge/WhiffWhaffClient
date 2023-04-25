@@ -1,11 +1,10 @@
 .recentMatches {
-  width: 90%;
-
   background-color: white;
+  width: 90%;
 }
 
 .title {
-  width: 80%;
+  width: 90%;
 }
 
 .match {
@@ -13,6 +12,7 @@
   grid-template-columns: 3fr 1fr 3fr;
   text-align: center;
   height: 50px;
+  margin-bottom: 5px;
 }
 
 .winner {

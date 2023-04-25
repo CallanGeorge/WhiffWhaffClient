@@ -22,11 +22,11 @@ const EventsBlock = () => {
 
   return (
     <div className={css.container}>
-      {!matches ? (
-        <h3>There are currently no upcoming events</h3>
+      {matches.length < 1 ? (
+        <h3>You have no match invites </h3>
       ) : (
-        matches.map((m: any) => (
-          <div className={css.invite}>
+        matches.map((m: any, i: any) => (
+          <div className={css.invite} key={i}>
             <div className={css.players}>
               <span>{m!.player1}</span> <span>challenged</span>{" "}
               <span>{m!.player2}</span>

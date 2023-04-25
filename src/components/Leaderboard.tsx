@@ -17,26 +17,29 @@ const Leaderboard = () => {
   }, []);
 
   return (
-    <div className={css.leaderboard}>
-      {data ? (
-        data.map((d: any) => (
-          <div className={css.leaderboardUser}>
-            <div>{d!.id}</div>
-            <div>
-              <Link to={`/${d!.username}`}>{d!.username}</Link>
+    <>
+      <h2>Leaderboard</h2>
+      <div className={css.leaderboard}>
+        {data ? (
+          data.map((d: any, i: any) => (
+            <div className={css.leaderboardUser} key={i}>
+              <div>{i + 1}</div>
+              <div>
+                <Link to={`/${d!.username}`}>{d!.username}</Link>
+              </div>
+              <div>{d!.score}</div>
             </div>
-            <div>{d!.score}</div>
-          </div>
-        ))
-      ) : (
-        <span>{error}</span>
-      )}
-      <div className={css.view}>
-        <Link to="/leaderboard">
-          <h2>View Full leaderboard</h2>
-        </Link>
+          ))
+        ) : (
+          <span>{error}</span>
+        )}
+        <div className={css.view}>
+          <Link to="/leaderboard">
+            <h2>View Full leaderboard</h2>
+          </Link>
+        </div>
       </div>
-    </div>
+    </>
   );
 };
 

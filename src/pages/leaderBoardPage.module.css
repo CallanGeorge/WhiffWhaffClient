@@ -6,12 +6,12 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  min-height: 100vh;
 }
 
 .leaderboard {
   background-color: white;
   width: 90%;
-  margin: auto;
 }
 
 .back {
