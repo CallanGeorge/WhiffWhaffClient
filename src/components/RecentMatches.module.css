@@ -1,10 +1,18 @@
 .recentMatches {
-  background-color: white;
   width: 90%;
+  color: black;
+  margin: auto;
 }
 
 .title {
   width: 90%;
+  color: #ff8f50;
+}
+
+.versus {
+  color: #ffc700;
+  display: grid;
+  place-items: center;
 }
 
 .match {
@@ -16,12 +24,12 @@
 }
 
 .winner {
-  background-color: greenyellow;
+  background-color: #a3e5da;
   padding: 15px;
 }
 
 .loser {
-  background-color: red;
+  background-color: #f18f54;
   place-items: center;
   padding: 15px;
 }

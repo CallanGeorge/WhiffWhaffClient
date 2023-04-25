@@ -4,6 +4,8 @@ import RecentMatches from "../components/RecentMatches";
 import { useEffect, useState } from "react";
 import axios from "axios";
 
+import WhiffWhaffLogo from "../assets/WhiffWhaffLogo.png";
+
 import css from "./Home.module.css";
 import { Link, useNavigate } from "react-router-dom";
 
@@ -27,7 +29,14 @@ export const Home = () => {
 
   return (
     <main className={css.main}>
-      <h1>xDesign Whiff Whaff</h1>
+      <div className={css.header}>
+        <img
+          className={css.image}
+          src={WhiffWhaffLogo}
+          alt="Whiff Whaff Logo"
+        />
+        <div className={css.signIn}>Sign In</div>
+      </div>
       <span>
         Signed in as: <Link to={`/${user}`}>{user}</Link>
       </span>

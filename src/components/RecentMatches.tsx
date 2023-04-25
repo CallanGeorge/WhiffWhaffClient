@@ -19,7 +19,7 @@ const RecentMatches = ({ matches }: RecentMatchesProps) => {
                   ? match?.player1
                   : match?.player2}
               </div>
-              <div>vs</div>
+              <div className={css.versus}>vs</div>
               <div className={css.loser}>
                 {match?.player1 === match?.winner
                   ? match?.player2

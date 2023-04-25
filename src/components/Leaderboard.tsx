@@ -18,7 +18,7 @@ const Leaderboard = () => {
 
   return (
     <>
-      <h2>Leaderboard</h2>
+      <h2 className={css.title}>Leaderboard</h2>
       <div className={css.leaderboard}>
         {data ? (
           data.map((d: any, i: any) => (

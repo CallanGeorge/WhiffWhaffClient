@@ -2,6 +2,11 @@
   background-color: white;
   width: 90%;
   margin: auto;
+  color: black;
+}
+
+.title {
+  color: #cf5f56;
 }
 
 .leaderboardUser {
