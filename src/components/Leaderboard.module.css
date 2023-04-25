@@ -1,5 +1,4 @@
 .leaderboard {
-  background-color: white;
   width: 90%;
   margin: auto;
   color: black;
@@ -13,6 +12,8 @@
   display: grid;
   grid-template-columns: 1fr 3fr 1fr;
   padding: 20px;
+  background-color: white;
+  margin-bottom: 10px;
 }
 
 .view {

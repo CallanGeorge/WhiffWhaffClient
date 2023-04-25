@@ -35,7 +35,7 @@ export const Home = () => {
           src={WhiffWhaffLogo}
           alt="Whiff Whaff Logo"
         />
-        <div className={css.signIn}>Sign In</div>
+        <div className={css.signIn}>{!user ? "Sign In" : "Sign out"}</div>
       </div>
       <span>
         Signed in as: <Link to={`/${user}`}>{user}</Link>
