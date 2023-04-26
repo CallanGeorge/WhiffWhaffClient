@@ -2,6 +2,8 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import css from "./Leaderboard.module.css";
 import { Link } from "react-router-dom";
+import { match } from "../models/Match";
+import { user } from "../models/User";
 
 const Leaderboard = () => {
   const [data, setData] = useState([]);
@@ -21,7 +23,7 @@ const Leaderboard = () => {
       <h2 className={css.title}>Leaderboard</h2>
       <div className={css.leaderboard}>
         {data ? (
-          data.map((d: any, i: any) => (
+          data.map((d: user, i: number) => (
             <div className={css.leaderboardUser} key={i}>
               <div>{i + 1}</div>
               <div>
