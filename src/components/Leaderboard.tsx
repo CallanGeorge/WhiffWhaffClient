@@ -22,6 +22,11 @@ const Leaderboard = () => {
     <>
       <h2 className={css.title}>Leaderboard</h2>
       <div className={css.leaderboard}>
+        <div className={css.leaderboardHead}>
+          <div>Position</div>
+          <div>Name</div>
+          <div>score</div>
+        </div>
         {data ? (
           data.map((d: user, i: number) => (
             <div className={css.leaderboardUser} key={i}>
