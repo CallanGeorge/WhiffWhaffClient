@@ -1,11 +1,13 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 
+import { match } from "../models/Match";
+
 import css from "./EventsBlock.module.css";
 import { Link } from "react-router-dom";
 
 const ConfirmedMatches = () => {
-  const [matches, setMatches] = useState<any>([]);
+  const [matches, setMatches] = useState<match[]>(); // MAYBE ERRORS HERE
   //@ts-ignore
   const item = JSON.parse(localStorage.getItem("profile"));
 
@@ -24,12 +26,13 @@ const ConfirmedMatches = () => {
   return (
     <>
       {matches && <h2>Ongoing Events</h2>}
+      {/* @ts-ignore */}
       <div className={css.container}>
         {console.log(matches)}
-        {matches.length === 0 ? (
+        {matches!.length === 0 ? (
           <h3>There are currently no upcoming matches</h3>
         ) : (
-          matches.map((m: any) => (
+          matches!.map((m: any) => (
             <div className={css.invite}>
               <div className={css.players}>
                 <span>{m!.player1}</span> <span>challenged</span>{" "}
