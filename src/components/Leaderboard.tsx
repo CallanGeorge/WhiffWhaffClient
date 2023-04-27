@@ -25,12 +25,16 @@ const Leaderboard = () => {
         <div className={css.leaderboardHead}>
           <div>Position</div>
           <div>Name</div>
-          <div>score</div>
+          <div>Wins</div>
         </div>
         {data ? (
           data.map((d: user, i: number) => (
-            <div className={css.leaderboardUser} key={i}>
-              <div>{i + 1}</div>
+            <div
+              className={i + 1 === 1 ? css.king : css.leaderboardUser}
+              style={{ opacity: `${100 - i * 10}%` }}
+              key={i}
+            >
+              <div>{i + 1 === 1 ? "👑" : i + 1} </div>
               <div>
                 <Link to={`/${d!.username}`}>{d!.username}</Link>
               </div>
