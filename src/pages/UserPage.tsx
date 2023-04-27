@@ -40,7 +40,6 @@ const UserPage = () => {
     axios.post(`http://localhost:8080/api/v1/matches`, {
       player1: item.data.username,
       player2: username,
-      // dateTime: "6am tomorrow",
     });
   };
 

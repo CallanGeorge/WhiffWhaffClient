@@ -7,6 +7,7 @@ interface RecentMatchesProps {
 }
 
 const RecentMatches = ({ matches }: RecentMatchesProps) => {
+  console.log(matches);
   return (
     <>
       <h2 className={css.title}>Recent games</h2>
@@ -14,17 +15,21 @@ const RecentMatches = ({ matches }: RecentMatchesProps) => {
         {matches ? (
           matches.map((match: any, i: any) => (
             <div className={css.match} key={i}>
-              <div className={css.winner}>
-                {match?.player1 === match?.winner
-                  ? match?.player1
-                  : match?.player2}
+              <div
+                className={
+                  match?.player1 === match?.winner ? css.winner : css.loser
+                }
+              >
+                {match?.player1}
               </div>
               <div className={css.versus}>vs</div>
-              <div className={css.loser}>
-                {match?.player1 === match?.winner
-                  ? match?.player2
-                  : match?.player1}{" "}
-              </div>{" "}
+              <div
+                className={
+                  match?.player1 === match?.winner ? css.loser : css.winner
+                }
+              >
+                {match?.player2}{" "}
+              </div>
             </div>
           ))
         ) : (
