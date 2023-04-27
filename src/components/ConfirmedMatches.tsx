@@ -29,10 +29,10 @@ const ConfirmedMatches = () => {
       {/* @ts-ignore */}
       <div className={css.container}>
         {console.log(matches)}
-        {matches!.length === 0 ? (
+        {matches?.length === 0 ? (
           <h3>There are currently no upcoming matches</h3>
         ) : (
-          matches!.map((m: any) => (
+          matches?.map((m: any) => (
             <div className={css.invite}>
               <div className={css.players}>
                 <span>{m!.player1}</span> <span>challenged</span>{" "}
