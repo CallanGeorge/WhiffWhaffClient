@@ -40,9 +40,7 @@ export const Home = () => {
       <span>
         Signed in as: <Link to={`/${user}`}>{user}</Link>
       </span>
-      {/* <div className={css.box}>
-        <ConfirmedMatches />
-      </div> */}
+
       <div className={css.box}>
         <Leaderboard />
       </div>

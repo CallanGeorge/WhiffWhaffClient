@@ -25,12 +25,12 @@ const ConfirmedMatches = () => {
 
   return (
     <>
-      {matches && <h2>Ongoing Events</h2>}
+      {matches && <h2>Upcoming Matches</h2>}
       {/* @ts-ignore */}
       <div className={css.container}>
         {console.log(matches)}
         {matches?.length === 0 ? (
-          <h3>There are currently no upcoming matches</h3>
+          <h3>You currently have no upcoming matches</h3>
         ) : (
           matches?.map((m: any) => (
             <div className={css.invite}>

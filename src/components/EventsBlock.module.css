@@ -14,7 +14,7 @@
   width: 100%;
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
-  background: white;
+  background: #f18f54;
   min-height: 150px;
 }
 
