@@ -1,10 +1,12 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 
+import { match } from "../models/Match";
+
 import css from "./EventsBlock.module.css";
 
 const EventsBlock = () => {
-  const [matches, setMatches] = useState<any>([]);
+  const [matches, setMatches] = useState<match[]>([]);
   //@ts-ignore
   const item = JSON.parse(localStorage.getItem("profile"));
 
@@ -25,13 +27,12 @@ const EventsBlock = () => {
       {matches.length < 1 ? (
         <h3>You have no match invites </h3>
       ) : (
-        matches.map((m: any, i: any) => (
+        matches.map((m: match, i: number) => (
           <div className={css.invite} key={i}>
             <div className={css.players}>
               <span>{m!.player1}</span> <span>challenged</span>{" "}
               <span>{m!.player2}</span>
             </div>
-            <div className={css.time}>{m!.dateTime} </div>
             <div className={m!.accepted ? css.accepted : css.pending}>
               pending
               {item.data.username === m!.player2 && m!.accepted === false && (

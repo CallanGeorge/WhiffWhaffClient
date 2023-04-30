@@ -1,8 +1,9 @@
-import ConfirmedMatches from "../components/ConfirmedMatches";
 import Leaderboard from "../components/Leaderboard";
 import RecentMatches from "../components/RecentMatches";
 import { useEffect, useState } from "react";
 import axios from "axios";
+
+import { match } from "../models/Match";
 
 import WhiffWhaffLogo from "../assets/WhiffWhaffLogo.png";
 
@@ -10,11 +11,10 @@ import css from "./Home.module.css";
 import { Link, useNavigate } from "react-router-dom";
 
 export const Home = () => {
-  const [user, setUser] = useState("");
+  const [user, setUser] = useState<string>("");
   const navigate = useNavigate();
 
-  const [matches, setMatches] = useState<any>([]);
-
+  const [matches, setMatches] = useState<match[]>([]);
   useEffect(() => {
     //@ts-ignore
     const item = JSON.parse(localStorage.getItem("profile"));

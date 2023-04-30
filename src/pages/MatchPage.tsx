@@ -2,11 +2,13 @@ import { useState, useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
 import axios from "axios";
 
+import { match } from "../models/Match";
+
 import css from "./UserPage.module.css";
 
 const MatchPage = () => {
-  const [data, setData] = useState<any>();
-  const [voted, setVoted] = useState<any>(false);
+  const [data, setData] = useState<match>();
+  const [voted, setVoted] = useState<boolean>(false);
   //@ts-ignore
   const item = JSON.parse(localStorage.getItem("profile"));
 
@@ -47,7 +49,6 @@ const MatchPage = () => {
           {data?.player1} vs {data?.player2}
         </h2>
 
-        <h3>{data?.dateTime}</h3>
         <h3>Who won?</h3>
         <div>
           {(item.data.username === data?.player2 &&

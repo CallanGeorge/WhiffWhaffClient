@@ -1,11 +1,11 @@
 export interface match {
-  id: Number;
-  player1: String;
-  player2: String;
-  player1Voted: Boolean;
-  player2Voted: Boolean;
-  player1Vote: String;
-  player2Vote: String;
-  accepted: Boolean;
-  winner: String;
+  id: string;
+  player1: string;
+  player2: string;
+  player1Voted: boolean;
+  player2Voted: boolean;
+  player1Vote: string;
+  player2Vote: string;
+  accepted: boolean;
+  winner: string;
 }

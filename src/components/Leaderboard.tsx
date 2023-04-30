@@ -2,11 +2,10 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import css from "./Leaderboard.module.css";
 import { Link } from "react-router-dom";
-import { match } from "../models/Match";
 import { user } from "../models/User";
 
 const Leaderboard = () => {
-  const [data, setData] = useState([]);
+  const [data, setData] = useState<user[]>([]);
   const [error, setError] = useState("");
 
   useEffect(() => {

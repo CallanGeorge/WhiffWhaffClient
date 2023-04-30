@@ -1,11 +1,13 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 
+import { user } from "../models/User";
+
 import css from "./leaderBoardPage.module.css";
 import { Link } from "react-router-dom";
 
 export const LeaderBoardPage = () => {
-  const [data, setData] = useState([]);
+  const [data, setData] = useState<user[]>([]);
   const [error, setError] = useState("");
 
   useEffect(() => {

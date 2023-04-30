@@ -8,15 +8,12 @@ import css from "./UserPage.module.css";
 import ConfirmedMatches from "../components/ConfirmedMatches";
 import RecentMatches from "../components/RecentMatches";
 
-interface user {
-  id: string;
-  username: string;
-  score: Number;
-}
+import { user } from "../models/User";
+import { match } from "../models/Match";
 
 const UserPage = () => {
-  const [data, setData] = useState<any>();
-  const [played, setPlayed] = useState<any>();
+  const [data, setData] = useState<user>();
+  const [played, setPlayed] = useState<match>();
   //@ts-ignore
   const item = JSON.parse(localStorage.getItem("profile"));
 

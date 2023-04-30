@@ -32,13 +32,12 @@ const ConfirmedMatches = () => {
         {matches?.length === 0 ? (
           <h3>You currently have no upcoming matches</h3>
         ) : (
-          matches?.map((m: any) => (
-            <div className={css.invite}>
+          matches?.map((m: match, i: number) => (
+            <div className={css.invite} key={i}>
               <div className={css.players}>
                 <span>{m!.player1}</span> <span>challenged</span>{" "}
                 <span>{m!.player2}</span>
               </div>
-              <div className={css.time}>{m!.dateTime} </div>
               <div className={m!.accepted ? css.accepted : css.pending}>
                 <button type="button">
                   <Link to={`/match/${m!.id}`}>I have played this game</Link>{" "}
