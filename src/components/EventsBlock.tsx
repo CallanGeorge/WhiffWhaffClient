@@ -5,7 +5,11 @@ import { match } from "../models/Match";
 
 import css from "./EventsBlock.module.css";
 
-const EventsBlock = () => {
+interface props {
+  checkInvites?: any;
+}
+
+const EventsBlock = ({ checkInvites }: props) => {
   const [matches, setMatches] = useState<match[]>([]);
   //@ts-ignore
   const item = JSON.parse(localStorage.getItem("profile"));
@@ -13,7 +17,10 @@ const EventsBlock = () => {
   useEffect(() => {
     axios
       .get(`http://localhost:8080/api/v1/invites/${item.data.username}`)
-      .then((response) => setMatches(response.data));
+      .then((response) => {
+        setMatches(response.data);
+        checkInvites(response.data);
+      });
   }, []);
 
   const handleAccept = (e: any) => {

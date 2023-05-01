@@ -6,7 +6,11 @@ import { match } from "../models/Match";
 import css from "./EventsBlock.module.css";
 import { Link } from "react-router-dom";
 
-const ConfirmedMatches = () => {
+interface props {
+  checkMatch?: any;
+}
+
+const ConfirmedMatches = ({ checkMatch }: props) => {
   const [matches, setMatches] = useState<match[]>(); // MAYBE ERRORS HERE
   //@ts-ignore
   const item = JSON.parse(localStorage.getItem("profile"));
@@ -14,7 +18,10 @@ const ConfirmedMatches = () => {
   useEffect(() => {
     axios
       .get(`http://localhost:8080/api/v1/matches/${item.data.username}`)
-      .then((response) => setMatches(response.data));
+      .then((response) => {
+        setMatches(response.data);
+        checkMatch(response.data);
+      });
   }, []);
 
   const handleAccept = (e: any) => {

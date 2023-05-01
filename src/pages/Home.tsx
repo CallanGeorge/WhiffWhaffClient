@@ -9,9 +9,13 @@ import WhiffWhaffLogo from "../assets/WhiffWhaffLogo.png";
 
 import css from "./Home.module.css";
 import { Link, useNavigate } from "react-router-dom";
+import ConfirmedMatches from "../components/ConfirmedMatches";
+import EventsBlock from "../components/EventsBlock";
 
 export const Home = () => {
   const [user, setUser] = useState<string>("");
+  const [confirmedMatch, setConfirmedMatch] = useState<match[]>();
+  const [invites, setInvites] = useState<match[]>();
   const navigate = useNavigate();
 
   const [matches, setMatches] = useState<match[]>([]);
@@ -40,6 +44,10 @@ export const Home = () => {
       <span>
         Signed in as: <Link to={`/${user}`}>{user}</Link>
       </span>
+      <div className={css.box}>
+        {confirmedMatch && <ConfirmedMatches checkMatch={setConfirmedMatch} />}
+        {invites && <EventsBlock checkInvites={setInvites} />}
+      </div>
 
       <div className={css.box}>
         <Leaderboard />
