@@ -31,6 +31,11 @@ export const Home = () => {
       });
   }, []);
 
+  const handleClick = () => {
+    user && localStorage.removeItem("profile");
+    navigate("/");
+  };
+
   return (
     <main className={css.main}>
       <div className={css.header}>
@@ -39,7 +44,9 @@ export const Home = () => {
           src={WhiffWhaffLogo}
           alt="Whiff Whaff Logo"
         />
-        <div className={css.signIn}>{!user ? "Sign In" : "Sign out"}</div>
+        <div onClick={handleClick} className={css.signIn}>
+          {!user ? "Sign In" : "Sign out"}
+        </div>
       </div>
       <span>
         Signed in as: <Link to={`/${user}`}>{user}</Link>

@@ -82,7 +82,7 @@ export const UserSignupPage = () => {
 
   return (
     <main className={css.container}>
-      <h1 role="heading">Welcome to whiff whaff</h1>
+      <h1>Welcome to whiff whaff</h1>
       {signUp === false ? (
         <form className={css.form} onSubmit={handleSubmit}>
           <h2>Sign In! or</h2>
