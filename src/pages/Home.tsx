@@ -32,8 +32,8 @@ export const Home = () => {
   }, []);
 
   const handleClick = () => {
-    user && localStorage.removeItem("profile");
-    navigate("/");
+    localStorage.removeItem("profile");
+    window.location.reload();
   };
 
   return (
@@ -48,9 +48,13 @@ export const Home = () => {
           {!user ? "Sign In" : "Sign out"}
         </div>
       </div>
-      <span>
-        Signed in as: <Link to={`/${user}`}>{user}</Link>
-      </span>
+
+      {user.length > 2 && (
+        <span>
+          Signed in as: <Link to={`/${user}`}>{user}</Link>
+        </span>
+      )}
+
       <div className={css.box}>
         {confirmedMatch && <ConfirmedMatches checkMatch={setConfirmedMatch} />}
         {invites && <EventsBlock checkInvites={setInvites} />}
