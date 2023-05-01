@@ -14,6 +14,7 @@ import { match } from "../models/Match";
 const UserPage = () => {
   const [data, setData] = useState<user>();
   const [played, setPlayed] = useState<match>();
+  const [challenged, setChallenged] = useState<boolean>(false);
   //@ts-ignore
   const item = JSON.parse(localStorage.getItem("profile"));
 
@@ -38,6 +39,8 @@ const UserPage = () => {
       player1: item.data.username,
       player2: username,
     });
+
+    setChallenged(true);
   };
 
   return (
@@ -49,10 +52,12 @@ const UserPage = () => {
         <h2>{data?.username}</h2>
         <h3>{data?.score}</h3>
 
-        {item.data.username !== username && (
+        {item.data.username !== username && challenged === false ? (
           <button type="button" onClick={handleChallenge}>
             Challenge
           </button>
+        ) : (
+          challenged == true && <span>Your Invite has been sent! </span>
         )}
         {item.data.username === username && (
           <div className={css.blocks}>
