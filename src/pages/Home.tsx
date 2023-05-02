@@ -31,6 +31,8 @@ export const Home = () => {
       });
   }, []);
 
+  console.log(invites);
+
   const handleClick = () => {
     localStorage.removeItem("profile");
     window.location.reload();
@@ -44,9 +46,9 @@ export const Home = () => {
           src={WhiffWhaffLogo}
           alt="Whiff Whaff Logo"
         />
-        <div onClick={handleClick} className={css.signIn}>
+        <button onClick={handleClick} className={css.signIn}>
           {!user ? "Sign In" : "Sign out"}
-        </div>
+        </button>
       </div>
 
       {user.length > 2 && (
@@ -56,8 +58,10 @@ export const Home = () => {
       )}
 
       <div className={css.box}>
-        {confirmedMatch && <ConfirmedMatches checkMatch={setConfirmedMatch} />}
-        {invites && <EventsBlock checkInvites={setInvites} />}
+        <ConfirmedMatches checkMatch={setConfirmedMatch} />
+      </div>
+      <div className={css.box}>
+        <EventsBlock checkInvites={setInvites} />
       </div>
 
       <div className={css.box}>

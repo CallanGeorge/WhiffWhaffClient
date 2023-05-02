@@ -30,32 +30,36 @@ const EventsBlock = ({ checkInvites }: props) => {
   };
 
   return (
-    <div className={css.container}>
-      {matches.length < 1 ? (
-        <h3>You have no match invites </h3>
-      ) : (
-        matches.map((m: match, i: number) => (
-          <div className={css.invite} key={i}>
-            <div className={css.players}>
-              <span>{m!.player1}</span> <span>challenged</span>{" "}
-              <span>{m!.player2}</span>
+    <>
+      {" "}
+      <h2>Invites</h2>
+      <div className={css.container}>
+        {matches.length < 1 ? (
+          <h3>You have no match invites </h3>
+        ) : (
+          matches.map((m: match, i: number) => (
+            <div className={css.invite} key={i}>
+              <div className={css.players}>
+                <span>{m!.player1}</span> <span>challenged</span>{" "}
+                <span>{m!.player2}</span>
+              </div>
+              <div className={m!.accepted ? css.accepted : css.pending}>
+                pending
+                {item.data.username === m!.player2 && m!.accepted === false && (
+                  <button
+                    id={m!.id}
+                    type="button"
+                    onClick={(e) => handleAccept(e)}
+                  >
+                    Accept
+                  </button>
+                )}
+              </div>
             </div>
-            <div className={m!.accepted ? css.accepted : css.pending}>
-              pending
-              {item.data.username === m!.player2 && m!.accepted === false && (
-                <button
-                  id={m!.id}
-                  type="button"
-                  onClick={(e) => handleAccept(e)}
-                >
-                  Accept
-                </button>
-              )}
-            </div>
-          </div>
-        ))
-      )}
-    </div>
+          ))
+        )}
+      </div>
+    </>
   );
 };
 
