@@ -17,6 +17,8 @@ export const UserSignupPage = () => {
 
   const [user, setUser] = useState("");
 
+  // need to look at AWS login this week!!
+
   useEffect(() => {
     //@ts-ignore
     const item = JSON.parse(localStorage.getItem("profile"));
