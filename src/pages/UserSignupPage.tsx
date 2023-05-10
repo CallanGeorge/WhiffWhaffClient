@@ -1,6 +1,6 @@
 import css from "./UserSignupPage.module.css";
 import { useRef, useState, useEffect } from "react";
-import { Auth } from "aws-amplify";
+
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
@@ -118,8 +118,6 @@ export const UserSignupPage = () => {
           <p>{error}</p>
         </form>
       )}
-
-      <button onClick={() => Auth.federatedSignIn()}>TEST</button>
     </main>
   );
 };
