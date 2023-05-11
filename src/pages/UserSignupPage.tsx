@@ -20,13 +20,17 @@ export const UserSignupPage = () => {
   // need to look at AWS login this week!!
 
   useEffect(() => {
-    //@ts-ignore
-    const item = JSON.parse(localStorage.getItem("profile"));
-    // profile from local storage returns differently constructed object depending on if created in sign up or sign in
-    if (item) {
-      setUser(item.data.username);
-      navigate("/home");
-    }
+    // //@ts-ignore
+    // const item = JSON.parse(localStorage.getItem("profile"));
+    // // profile from local storage returns differently constructed object depending on if created in sign up or sign in
+    // if (item) {
+    //   setUser(item.data.username);
+    //   navigate("/home");
+    // }
+
+    axios.get("http://localhost:8080/").then((response) => {
+      console.log(response);
+    });
   }, []);
 
   error === "none" && navigate("/home");
