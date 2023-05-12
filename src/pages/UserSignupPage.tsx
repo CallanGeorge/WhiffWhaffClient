@@ -28,7 +28,7 @@ export const UserSignupPage = () => {
     //   navigate("/home");
     // }
 
-    axios.get("http://localhost:8080/").then((response) => {
+    axios.get("http://localhost:8080/secured").then((response) => {
       console.log(response);
     });
   }, []);
@@ -90,7 +90,10 @@ export const UserSignupPage = () => {
   return (
     <main className={css.container}>
       <h1>Welcome to whiff whaff</h1>
-      {signUp === false ? (
+      <button>
+        <a href="http://localhost:8080/auth">Sign In</a>
+      </button>
+      {/* {signUp === false ? (
         <form className={css.form} onSubmit={handleSubmit}>
           <h2>Sign In! or</h2>
           <button type="button" onClick={() => setSignup(true)}>
@@ -119,9 +122,9 @@ export const UserSignupPage = () => {
           <button type="submit">
             {pending ? <span>Pending</span> : <span>Submit</span>}
           </button>
-          <p>{error}</p>
-        </form>
-      )}
+          <p>{error}</p> */}
+      {/* </form> */}
+      {/* )} */}
     </main>
   );
 };
