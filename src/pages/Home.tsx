@@ -30,7 +30,7 @@ export const Home = () => {
         setMatches(response.data.content);
       });
 
-    axios.get(`http://localhost:8080/users`).then((response) => {
+    axios.get(`http://localhost:8080/user`).then((response) => {
       console.log(response);
     });
   }, []);
