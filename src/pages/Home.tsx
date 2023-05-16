@@ -23,12 +23,16 @@ export const Home = () => {
     //@ts-ignore
     const item = JSON.parse(localStorage.getItem("profile"));
     // profile from local storage returns differently constructed object depending on if created in sign up or sign in
-    item ? setUser(item.data.username) : navigate("/");
+    item ? setUser(item.data.username) : setUser("BEANS");
     axios
       .get(`http://localhost:8080/api/v1/all-matches?page=0&size=5`)
       .then((response) => {
         setMatches(response.data.content);
       });
+
+    axios.get(`http://localhost:8080/users`).then((response) => {
+      console.log(response);
+    });
   }, []);
 
   console.log(invites);
@@ -57,7 +61,7 @@ export const Home = () => {
         </span>
       )}
 
-      <div className={css.box}>
+      {/* <div className={css.box}>
         <ConfirmedMatches checkMatch={setConfirmedMatch} />
       </div>
       <div className={css.box}>
@@ -69,7 +73,7 @@ export const Home = () => {
       </div>
       <div className={css.box}>
         <RecentMatches matches={matches} />
-      </div>
+      </div> */}
     </main>
   );
 };
