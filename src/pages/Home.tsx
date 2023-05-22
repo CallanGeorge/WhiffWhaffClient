@@ -53,7 +53,7 @@ export const Home = () => {
           alt="Whiff Whaff Logo"
         />
         <button onClick={handleClick} className={css.signIn}>
-          {!user ? "Sign In" : "Sign out"}
+          Sign out
         </button>
       </div>
 
