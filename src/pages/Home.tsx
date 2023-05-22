@@ -20,19 +20,21 @@ export const Home = () => {
 
   const [matches, setMatches] = useState<match[]>([]);
   useEffect(() => {
-    //@ts-ignore
-    const item = JSON.parse(localStorage.getItem("profile"));
-    // profile from local storage returns differently constructed object depending on if created in sign up or sign in
-    item ? setUser(item.data.username) : setUser("BEANS");
     axios
       .get(`http://localhost:8080/api/v1/all-matches?page=0&size=5`)
       .then((response) => {
         setMatches(response.data.content);
       });
 
-    axios.get(`http://localhost:8080/user`).then((response) => {
-      console.log(response);
-    });
+    axios
+      .get(`http://localhost:8080/user`, {
+        withCredentials: true,
+        //@ts-ignore
+        origin: "http://localhost:8080",
+      })
+      .then((response) => {
+        setUser(response.data);
+      });
   }, []);
 
   console.log(invites);
