@@ -13,7 +13,7 @@ import ConfirmedMatches from "../components/ConfirmedMatches";
 import EventsBlock from "../components/EventsBlock";
 
 export const Home = () => {
-  const [user, setUser] = useState<string>("");
+  const [user, setUser] = useState<any>({});
   const [confirmedMatch, setConfirmedMatch] = useState<match[]>();
   const [invites, setInvites] = useState<match[]>();
   const navigate = useNavigate();
@@ -57,11 +57,11 @@ export const Home = () => {
         </button>
       </div>
 
-      {user.length > 2 && (
+      {
         <span>
-          Signed in as: <Link to={`/${user}`}>{user}</Link>
+          Signed in as: <Link to={`/${user.name}`}>{user.name}</Link>
         </span>
-      )}
+      }
 
       {/* <div className={css.box}>
         <ConfirmedMatches checkMatch={setConfirmedMatch} />
