@@ -11,6 +11,7 @@ import css from "./Home.module.css";
 import { Link, useNavigate } from "react-router-dom";
 import ConfirmedMatches from "../components/ConfirmedMatches";
 import EventsBlock from "../components/EventsBlock";
+import Cookies from "universal-cookie";
 
 export const Home = () => {
   const [user, setUser] = useState<any>({});
@@ -34,15 +35,11 @@ export const Home = () => {
       })
       .then((response) => {
         setUser(response.data);
-      });
+      })
+      .catch((error) => navigate("/"));
   }, []);
 
   console.log(invites);
-
-  const handleClick = () => {
-    localStorage.removeItem("profile");
-    window.location.reload();
-  };
 
   return (
     <main className={css.main}>
@@ -52,8 +49,8 @@ export const Home = () => {
           src={WhiffWhaffLogo}
           alt="Whiff Whaff Logo"
         />
-        <button onClick={handleClick} className={css.signIn}>
-          Sign out
+        <button className={css.signIn}>
+          <a href="http://localhost:8080/logout">Sign out</a>
         </button>
       </div>
 
