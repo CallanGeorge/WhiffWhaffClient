@@ -27,8 +27,10 @@ export const Home = () => {
         setMatches(response.data.content);
       });
 
+    const date = "2023-05-29";
+
     axios
-      .get(`http://localhost:8080/user`, {
+      .get(`http://localhost:8080/token/${date}`, {
         withCredentials: true,
         //@ts-ignore
         origin: "http://localhost:8080",
