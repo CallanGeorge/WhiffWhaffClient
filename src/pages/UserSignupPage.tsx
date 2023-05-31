@@ -27,63 +27,68 @@ export const UserSignupPage = () => {
     //   setUser(item.data.username);
     //   navigate("/home");
     // }
-
-    axios.get("http://localhost:8080/secured").then((response) => {
-      console.log(response);
-    });
+    // axios
+    //   .get("http://localhost:8080/secured", {
+    //     withCredentials: true,
+    //     //@ts-ignore
+    //     origin: "http://localhost:8080",
+    //   })
+    //   .then((response) => {
+    //     console.log(response);
+    //   });
   }, []);
 
   error === "none" && navigate("/home");
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
+  // const handleSubmit = async (e: React.FormEvent) => {
+  //   e.preventDefault();
 
-    if (!signUp) {
-      await axios
-        .post(
-          "http://localhost:8080/api/v1/login",
-          {},
-          {
-            auth: {
-              username: nameRef.current!.value,
-              password: passwordRef.current!.value,
-            },
-          }
-        )
-        .then((res) => {
-          setPending(false);
-          setError("none");
-          console.log(res);
-          const data = res.data;
+  //   if (!signUp) {
+  //     await axios
+  //       .post(
+  //         "http://localhost:8080/api/v1/login",
+  //         {},
+  //         {
+  //           auth: {
+  //             username: nameRef.current!.value,
+  //             password: passwordRef.current!.value,
+  //           },
+  //         }
+  //       )
+  //       .then((res) => {
+  //         setPending(false);
+  //         setError("none");
+  //         console.log(res);
+  //         const data = res.data;
 
-          localStorage.setItem("profile", JSON.stringify({ data }));
-        })
-        .catch((err) => setError("Error loggin in"));
-    }
+  //         localStorage.setItem("profile", JSON.stringify({ data }));
+  //       })
+  //       .catch((err) => setError("Error loggin in"));
+  //   }
 
-    if (signUp) {
-      !confirmPasswordRef.current!.value || !passwordRef.current!.value
-        ? setError("Input password ")
-        : confirmPasswordRef.current?.value !== passwordRef.current?.value
-        ? setError("Passwords do not match")
-        : (() => setPending(true)) &&
-          (() => setError("")) &&
-          (await axios
-            .post(
-              "http://localhost:8080/api/v1/users",
+  //   if (signUp) {
+  //     !confirmPasswordRef.current!.value || !passwordRef.current!.value
+  //       ? setError("Input password ")
+  //       : confirmPasswordRef.current?.value !== passwordRef.current?.value
+  //       ? setError("Passwords do not match")
+  //       : (() => setPending(true)) &&
+  //         (() => setError("")) &&
+  //         (await axios
+  //           .post(
+  //             "http://localhost:8080/api/v1/users",
 
-              {
-                username: nameRef.current!.value,
-                password: passwordRef.current!.value,
-              }
-            )
-            .then((res) => {
-              setPending(false);
-              navigate("/"); // will need to redirect to login after sign up - doesnt work not cause need to refactor
-            })
-            .catch((err) => setError("Username already in use.")));
-    }
-  };
+  //             {
+  //               username: nameRef.current!.value,
+  //               password: passwordRef.current!.value,
+  //             }
+  //           )
+  //           .then((res) => {
+  //             setPending(false);
+  //             navigate("/"); // will need to redirect to login after sign up - doesnt work not cause need to refactor
+  //           })
+  //           .catch((err) => setError("Username already in use.")));
+  //   }
+  // };
 
   // refactor this into smaller components
 

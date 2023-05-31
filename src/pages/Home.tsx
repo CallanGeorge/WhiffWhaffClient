@@ -21,11 +21,11 @@ export const Home = () => {
 
   const [matches, setMatches] = useState<match[]>([]);
   useEffect(() => {
-    axios
-      .get(`http://localhost:8080/api/v1/all-matches?page=0&size=5`)
-      .then((response) => {
-        setMatches(response.data.content);
-      });
+    // axios
+    //   .get(`http://localhost:8080/api/v1/all-matches?page=0&size=5`)
+    //   .then((response) => {
+    //     setMatches(response.data.content);
+    //   });
 
     const date = "2023-05-29";
 
