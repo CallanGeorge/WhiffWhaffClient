@@ -11,7 +11,6 @@ import css from "./Home.module.css";
 import { Link, useNavigate } from "react-router-dom";
 import ConfirmedMatches from "../components/ConfirmedMatches";
 import EventsBlock from "../components/EventsBlock";
-import Cookies from "universal-cookie";
 
 export const Home = () => {
   const [user, setUser] = useState<any>({});
