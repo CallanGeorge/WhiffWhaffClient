@@ -26,7 +26,7 @@ export const Home = () => {
     //     setMatches(response.data.content);
     //   });
 
-    const date = "2023-05-29";
+    const date = "2023-06-12";
 
     axios
       .get(`http://localhost:8080/token/${date}`, {
@@ -39,8 +39,6 @@ export const Home = () => {
       })
       .catch((error) => navigate("/"));
   }, []);
-
-  console.log(invites);
 
   return (
     <main className={css.main}>
