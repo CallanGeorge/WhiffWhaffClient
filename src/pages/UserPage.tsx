@@ -49,7 +49,7 @@ const UserPage = () => {
         Back Home
       </Link>
       <main className={css.main}>
-        <h2>{data?.username}</h2>
+        <h2>{data?.name}</h2>
         <h3>{data?.score}</h3>
 
         {item.data.username !== username && challenged === false ? (

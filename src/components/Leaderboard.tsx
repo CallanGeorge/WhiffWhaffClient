@@ -10,12 +10,18 @@ const Leaderboard = () => {
 
   useEffect(() => {
     axios
-      .get("http://localhost:8080/api/v1/users?page=0&size=5")
+      .get("http://localhost:8080/api/v1/users?page=0&size=5", {
+        withCredentials: true,
+        //@ts-ignore
+        origin: "http://localhost:8080",
+      })
       .then((response) => {
         setData(response.data.content);
       })
       .catch((error) => setError(error.message));
   }, []);
+
+  console.log(data);
 
   return (
     <>
@@ -35,7 +41,7 @@ const Leaderboard = () => {
             >
               <div>{i + 1 === 1 ? "👑" : i + 1} </div>
               <div>
-                <Link to={`/${d!.username}`}>{d!.username}</Link>
+                <Link to={`/${d!.name}`}>{d!.name}</Link>
               </div>
               <div>{d!.score}</div>
             </div>

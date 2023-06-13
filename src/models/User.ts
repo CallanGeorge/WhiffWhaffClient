@@ -1,5 +1,6 @@
 export interface user {
   id: string;
-  username: String;
+  name: String;
+  email: String;
   score: number;
 }
