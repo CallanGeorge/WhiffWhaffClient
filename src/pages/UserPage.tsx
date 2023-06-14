@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Link, useParams } from "react-router-dom";
+import { Link, useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
 
 import EventsBlock from "../components/EventsBlock";
@@ -12,33 +12,61 @@ import { user } from "../models/User";
 import { match } from "../models/Match";
 
 const UserPage = () => {
+  const [user, setUser] = useState<user>();
   const [data, setData] = useState<user>();
   const [played, setPlayed] = useState<match>();
   const [challenged, setChallenged] = useState<boolean>(false);
-  //@ts-ignore
-  const item = JSON.parse(localStorage.getItem("profile"));
+  const navigate = useNavigate();
 
   const { username } = useParams();
 
   useEffect(() => {
     axios
-      .get(`http://localhost:8080/api/v1/users/${username}`)
+      .get(`http://localhost:8080/api/v1/user`, {
+        withCredentials: true,
+        //@ts-ignore
+        origin: "http://localhost:8080",
+      })
       .then((response) => {
+        setUser(response.data);
+      })
+      .catch((error) => navigate("/"));
+
+    axios
+      .get(`http://localhost:8080/api/v1/users/${username}`, {
+        withCredentials: true,
+        //@ts-ignore
+        origin: "http://localhost:8080",
+      })
+      .then((response) => {
+        console.log("done");
         setData(response.data);
       });
 
     axios
-      .get(`http://localhost:8080/api/v1/final-matches/${username}`)
+      .get(`http://localhost:8080/api/v1/final-matches/${username}`, {
+        withCredentials: true,
+        //@ts-ignore
+        origin: "http://localhost:8080",
+      })
       .then((response) => {
         setPlayed(response.data);
       });
   }, []);
 
   const handleChallenge = () => {
-    axios.post(`http://localhost:8080/api/v1/matches`, {
-      player1: item.data.username,
-      player2: username,
-    });
+    axios.post(
+      `http://localhost:8080/api/v1/matches`,
+      {
+        player1: user?.name,
+        player2: data?.name,
+      },
+      {
+        withCredentials: true,
+        //@ts-ignore
+        origin: "http://localhost:8080",
+      }
+    );
 
     setChallenged(true);
   };
@@ -52,20 +80,20 @@ const UserPage = () => {
         <h2>{data?.name}</h2>
         <h3>{data?.score}</h3>
 
-        {item.data.username !== username && challenged === false ? (
+        {data?.name !== user?.name && challenged === false ? (
           <button type="button" onClick={handleChallenge}>
             Challenge
           </button>
         ) : (
           challenged == true && <span>Your Invite has been sent! </span>
         )}
-        {item.data.username === username && (
+        {data?.name === username && (
           <div className={css.blocks}>
-            <h2>Invites</h2> <EventsBlock /> <ConfirmedMatches />
+            <EventsBlock /> <ConfirmedMatches user={user} />
           </div>
         )}
 
-        <RecentMatches matches={played} />
+        {/* <RecentMatches matches={played} /> */}
       </main>
     </>
   );

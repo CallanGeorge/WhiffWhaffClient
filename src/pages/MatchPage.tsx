@@ -3,39 +3,71 @@ import { Link, useParams } from "react-router-dom";
 import axios from "axios";
 
 import { match } from "../models/Match";
+import { user } from "../models/User";
 
 import css from "./UserPage.module.css";
 
 const MatchPage = () => {
   const [data, setData] = useState<match>();
   const [voted, setVoted] = useState<boolean>(false);
-  //@ts-ignore
-  const item = JSON.parse(localStorage.getItem("profile"));
+  const [user, setUser] = useState<user>();
 
   const { id } = useParams();
 
   useEffect(() => {
-    axios.get(`http://localhost:8080/api/v1/match/${id}`).then((response) => {
-      console.log(response.data);
-      setData(response.data);
-    });
+    axios
+      .get(`http://localhost:8080/api/v1/user`, {
+        withCredentials: true,
+        //@ts-ignore
+        origin: "http://localhost:8080",
+      })
+      .then((response) => {
+        setUser(response.data);
+      });
+
+    axios
+      .get(`http://localhost:8080/api/v1/match/${id}`, {
+        withCredentials: true,
+        //@ts-ignore
+        origin: "http://localhost:8080",
+      })
+      .then((response) => {
+        console.log(response.data);
+        setData(response.data);
+      });
   }, []);
 
   const p1WinHandler = () => {
     axios
-      .put(`http://localhost:8080/api/v1/result/${id}`, {
-        vote: data!.player1,
-        user: item.data.username,
-      })
+      .put(
+        `http://localhost:8080/api/v1/result/${id}`,
+        {
+          vote: data!.player1,
+          user: user?.name,
+        },
+        {
+          withCredentials: true,
+          //@ts-ignore
+          origin: "http://localhost:8080",
+        }
+      )
       .then(() => setVoted(true));
   };
 
   const p2WinHandler = () => {
     axios
-      .put(`http://localhost:8080/api/v1/result/${id}`, {
-        vote: data!.player2,
-        user: item.data.username,
-      })
+      .put(
+        `http://localhost:8080/api/v1/result/${id}`,
+        {
+          vote: data!.player2,
+          user: user?.name,
+        },
+        {
+          withCredentials: true,
+          //@ts-ignore
+          origin: "http://localhost:8080",
+        }
+      )
       .then(() => setVoted(true));
   };
 
@@ -51,10 +83,8 @@ const MatchPage = () => {
 
         <h3>Who won?</h3>
         <div>
-          {(item.data.username === data?.player2 &&
-            data?.player2Voted === true) ||
-          (item.data.username === data?.player1 &&
-            data?.player1Voted === true) ||
+          {(user?.name === data?.player2 && data?.player2Voted === true) ||
+          (user?.name === data?.player1 && data?.player1Voted === true) ||
           voted === true ? ( // last change here
             <span>Waiting for the other player to vote</span>
           ) : (

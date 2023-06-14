@@ -2,31 +2,43 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 
 import { match } from "../models/Match";
+import { user } from "../models/User";
 
 import css from "./EventsBlock.module.css";
 
 interface props {
   checkInvites?: any;
+  user?: user;
 }
 
-const EventsBlock = ({ checkInvites }: props) => {
+const EventsBlock = ({ checkInvites, user }: props) => {
   const [matches, setMatches] = useState<match[]>([]);
-  //@ts-ignore
-  const item = JSON.parse(localStorage.getItem("profile"));
 
   useEffect(() => {
     axios
-      .get(`http://localhost:8080/api/v1/invites/${item.data.username}`)
+      .get(`http://localhost:8080/api/v1/invites/${user?.name}`, {
+        withCredentials: true,
+        //@ts-ignore
+        origin: "http://localhost:8080",
+      })
       .then((response) => {
         setMatches(response.data);
         checkInvites(response.data);
       });
-  }, []);
+  }, [user]);
 
   const handleAccept = (e: any) => {
     const id = Number(e.target.id);
 
-    axios.put(`http://localhost:8080/api/v1/matches/${id}`);
+    axios.put(
+      `http://localhost:8080/api/v1/matches/${id}`,
+      {},
+      {
+        withCredentials: true,
+        //@ts-ignore
+        origin: "http://localhost:8080",
+      }
+    );
   };
 
   return (
@@ -45,7 +57,7 @@ const EventsBlock = ({ checkInvites }: props) => {
               </div>
               <div className={m!.accepted ? css.accepted : css.pending}>
                 pending
-                {item.data.username === m!.player2 && m!.accepted === false && (
+                {user?.name === m!.player2 && m!.accepted === false && (
                   <button
                     id={m!.id}
                     type="button"

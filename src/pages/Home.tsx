@@ -29,7 +29,7 @@ export const Home = () => {
     const date = "2023-06-12";
 
     axios
-      .get(`http://localhost:8080/api/v1/token/${date}`, {
+      .get(`http://localhost:8080/api/v1/user`, {
         withCredentials: true,
         //@ts-ignore
         origin: "http://localhost:8080",
@@ -60,11 +60,11 @@ export const Home = () => {
       }
 
       {/* <div className={css.box}>
-        <ConfirmedMatches checkMatch={setConfirmedMatch} />
-      </div>
-      <div className={css.box}>
-        <EventsBlock checkInvites={setInvites} />
+        <ConfirmedMatches checkMatch={setConfirmedMatch} user={user} />
       </div> */}
+      <div className={css.box}>
+        <EventsBlock checkInvites={setInvites} user={user} />
+      </div>
 
       <div className={css.box}>
         <Leaderboard />

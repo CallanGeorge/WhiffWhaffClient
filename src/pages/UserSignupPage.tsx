@@ -5,7 +5,7 @@ export const UserSignupPage = () => {
     <main className={css.container}>
       <h1>Welcome to whiff whaff</h1>
       <button>
-        <a href="http://localhost:8080/auth">Sign In</a>
+        <a href="http://localhost:8080/api/v1/auth">Sign In</a>
       </button>
     </main>
   );
