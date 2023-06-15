@@ -54,23 +54,6 @@ const UserPage = () => {
       });
   }, []);
 
-  const handleChallenge = () => {
-    axios.post(
-      `http://localhost:8080/api/v1/matches`,
-      {
-        player1: user?.name,
-        player2: data?.name,
-      },
-      {
-        withCredentials: true,
-        //@ts-ignore
-        origin: "http://localhost:8080",
-      }
-    );
-
-    setChallenged(true);
-  };
-
   return (
     <>
       <Link to="/home" className={css.back}>
@@ -81,8 +64,8 @@ const UserPage = () => {
         <h3>{data?.score}</h3>
 
         {data?.name !== user?.name && challenged === false ? (
-          <button type="button" onClick={handleChallenge}>
-            Challenge
+          <button type="button">
+            <Link to={`/${data?.name}/challenge`}>Challenge</Link>
           </button>
         ) : (
           challenged == true && <span>Your Invite has been sent! </span>

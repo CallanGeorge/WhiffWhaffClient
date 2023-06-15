@@ -4,6 +4,7 @@ import { Home } from "./pages/Home";
 import { LeaderBoardPage } from "./pages/LeaderBoardPage";
 import UserPage from "./pages/UserPage";
 import MatchPage from "./pages/MatchPage";
+import { ChallengePage } from "./pages/ChallengePage";
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
         <Route path="/leaderboard" element={<LeaderBoardPage />} />
         <Route path="/:username" element={<UserPage />} />
         <Route path="/match/:id" element={<MatchPage />} />
+        <Route path="/:username/challenge" element={<ChallengePage />} />
       </Routes>
     </BrowserRouter>
   );
