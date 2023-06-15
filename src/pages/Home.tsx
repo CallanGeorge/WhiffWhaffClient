@@ -26,8 +26,6 @@ export const Home = () => {
     //     setMatches(response.data.content);
     //   });
 
-    const date = "2023-06-12";
-
     axios
       .get(`http://localhost:8080/api/v1/user`, {
         withCredentials: true,
