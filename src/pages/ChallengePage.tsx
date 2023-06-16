@@ -3,6 +3,7 @@ import css from "./challengePage.module.css";
 
 import { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
+import { DatePicker } from "@mui/x-date-pickers";
 
 import { user } from "../models/User";
 import { match } from "../models/Match";
@@ -13,11 +14,14 @@ export const ChallengePage = () => {
   const [userCalendar, setUserCalendar] = useState<any>([]);
   const [oppCalendar, setOppCalendar] = useState<any>();
   const [challenged, setChallenged] = useState<boolean>(false);
+  const [day, setDay] = useState<Number>();
+  const [month, setMonth] = useState<Number>();
+  const [year, setYear] = useState<Number>();
   const navigate = useNavigate();
 
   const { username } = useParams();
 
-  const date = "2023-06-12";
+  const date = `${year}-${month! < 10 ? `0${month}` : month}-${day}`;
 
   useEffect(() => {
     axios
@@ -49,7 +53,9 @@ export const ChallengePage = () => {
       .then((response) => {
         setOppCalendar(response.data);
       });
-  }, []);
+
+    console.log(date);
+  }, [day]);
 
   const handleChallenge = () => {
     axios.post(
@@ -97,6 +103,18 @@ export const ChallengePage = () => {
           )}
         </div>
       </div>
+
+      <DatePicker
+        onChange={(e) => {
+          /* @ts-ignore */
+          setDay(e.$D);
+          /* @ts-ignore */
+          setMonth(e.$M + 1);
+          /* @ts-ignore */
+          setYear(e.$y);
+          console.log(e);
+        }}
+      />
     </main>
   );
 };
