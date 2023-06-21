@@ -3,7 +3,7 @@ import css from "./challengePage.module.css";
 
 import { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import { DatePicker } from "@mui/x-date-pickers";
+import { DatePicker, TimePicker } from "@mui/x-date-pickers";
 
 import { user } from "../models/User";
 import { match } from "../models/Match";
@@ -17,6 +17,7 @@ export const ChallengePage = () => {
   const [day, setDay] = useState<Number>();
   const [month, setMonth] = useState<Number>();
   const [year, setYear] = useState<Number>();
+  const [time, setTime] = useState<String>();
   const navigate = useNavigate();
 
   const { username } = useParams();
@@ -53,8 +54,6 @@ export const ChallengePage = () => {
       .then((response) => {
         setOppCalendar(response.data);
       });
-
-    console.log(date);
   }, [day]);
 
   const handleChallenge = () => {
@@ -112,7 +111,19 @@ export const ChallengePage = () => {
           setMonth(e.$M + 1);
           /* @ts-ignore */
           setYear(e.$y);
-          console.log(e);
+        }}
+      />
+
+      <TimePicker
+        onChange={(e: any) => {
+          setTime(e.$d);
+          /* @ts-ignore */
+          const dateObj = new Date(e.$d);
+          const hours = dateObj.getHours();
+          const minutes = dateObj.getMinutes();
+          const seconds = dateObj.getSeconds();
+
+          setTime(`${hours}:${minutes}:${seconds}`);
         }}
       />
     </main>
