@@ -12,6 +12,7 @@ export const ChallengePage = () => {
   const [user, setUser] = useState<user>();
   const [data, setData] = useState<user>();
   const [userCalendar, setUserCalendar] = useState<any>([]);
+  const [whiffWhaffCalendar, setWhiffWhaffCalendar] = useState<any>([]);
   const [oppCalendar, setOppCalendar] = useState<any>();
   const [challenged, setChallenged] = useState<boolean>(false);
   const [day, setDay] = useState<Number>();
@@ -46,6 +47,27 @@ export const ChallengePage = () => {
       });
 
     axios
+      .get(`http://localhost:8080/api/v1/token/whiffwhaff/${date}`, {
+        withCredentials: true,
+        //@ts-ignore
+        origin: "http://localhost:8080",
+      })
+      .then((response) => {
+        setWhiffWhaffCalendar(response.data);
+      });
+
+    axios
+      .get(`http://localhost:8080/api/v1/users/${username}`, {
+        withCredentials: true,
+        //@ts-ignore
+        origin: "http://localhost:8080",
+      })
+      .then((response) => {
+        console.log("done");
+        setData(response.data);
+      });
+
+    axios
       .get(`http://localhost:8080/api/v1/token/${date}/${username}`, {
         withCredentials: true,
         //@ts-ignore
@@ -60,8 +82,11 @@ export const ChallengePage = () => {
     axios.post(
       `http://localhost:8080/api/v1/matches`,
       {
-        player1: user?.name,
-        player2: data?.name,
+        player1: user?.email,
+        player2: data?.email,
+
+        //FIGURE OUT HOW TO MAKE THIS MORE CONSITENT
+        matchTime: `${date}T${time}`,
       },
       {
         withCredentials: true,
@@ -90,6 +115,18 @@ export const ChallengePage = () => {
           )}
         </div>
         <div className={css.oppCalendar}>
+          {whiffWhaffCalendar ? (
+            whiffWhaffCalendar.map((m: any) => (
+              <div className={css.calendarItem}>
+                <h2>{m?.title}</h2>
+                <h3>{m?.time}</h3>
+              </div>
+            ))
+          ) : (
+            <p>no events</p>
+          )}
+        </div>
+        <div className={css.oppCalendar}>
           {oppCalendar ? (
             oppCalendar.map((m: any) => (
               <div className={css.calendarItem}>
@@ -102,7 +139,6 @@ export const ChallengePage = () => {
           )}
         </div>
       </div>
-
       <DatePicker
         onChange={(e) => {
           /* @ts-ignore */
@@ -113,7 +149,6 @@ export const ChallengePage = () => {
           setYear(e.$y);
         }}
       />
-
       <TimePicker
         onChange={(e: any) => {
           setTime(e.$d);
@@ -123,9 +158,12 @@ export const ChallengePage = () => {
           const minutes = dateObj.getMinutes();
           const seconds = dateObj.getSeconds();
 
-          setTime(`${hours}:${minutes}:${seconds}`);
+          setTime(`${hours}:${minutes}0:${seconds}0`);
         }}
       />
+      <button type="button" onClick={handleChallenge}>
+        Challenge
+      </button>
     </main>
   );
 };

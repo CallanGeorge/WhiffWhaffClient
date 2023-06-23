@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 
-import { match } from "../models/Match";
+import { match, RequestResponse } from "../models/Match";
 import { user } from "../models/User";
 
 import css from "./EventsBlock.module.css";
@@ -57,15 +57,16 @@ const EventsBlock = ({ checkInvites, user }: props) => {
               </div>
               <div className={m!.accepted ? css.accepted : css.pending}>
                 pending
-                {user?.name === m!.player2 && m!.accepted === false && (
-                  <button
-                    id={m!.id}
-                    type="button"
-                    onClick={(e) => handleAccept(e)}
-                  >
-                    Accept
-                  </button>
-                )}
+                {user?.name === m!.player2 &&
+                  m!.accepted === RequestResponse.PENDING && (
+                    <button
+                      id={m!.id}
+                      type="button"
+                      onClick={(e) => handleAccept(e)}
+                    >
+                      Accept
+                    </button>
+                  )}
               </div>
             </div>
           ))

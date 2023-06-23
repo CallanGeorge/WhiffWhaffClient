@@ -1,3 +1,9 @@
+export enum RequestResponse {
+  PENDING,
+  AECCEPTED,
+  REJECTED,
+}
+
 export interface match {
   id: string;
   player1: string;
@@ -6,6 +12,6 @@ export interface match {
   player2Voted: boolean;
   player1Vote: string;
   player2Vote: string;
-  accepted: boolean;
+  accepted: RequestResponse;
   winner: string;
 }
