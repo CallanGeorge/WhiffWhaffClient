@@ -17,7 +17,7 @@ const ConfirmedMatches = ({ checkMatch, user }: props) => {
 
   useEffect(() => {
     axios
-      .get(`http://localhost:8080/api/v1/matches/${user?.name}`, {
+      .get(`http://localhost:8080/api/v1/matches/${user?.email}`, {
         withCredentials: true,
         //@ts-ignore
         origin: "http://localhost:8080",
@@ -43,7 +43,7 @@ const ConfirmedMatches = ({ checkMatch, user }: props) => {
                 <span>{m!.player1}</span> <span>challenged</span>{" "}
                 <span>{m!.player2}</span>
               </div>
-              <div className={m!.accepted ? css.accepted : css.pending}>
+              <div className={m!.response === 1 ? css.accepted : css.pending}>
                 <button type="button">
                   <Link to={`/match/${m!.id}`}>I have played this game</Link>{" "}
                 </button>

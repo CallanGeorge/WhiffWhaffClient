@@ -57,9 +57,9 @@ export const Home = () => {
         </span>
       }
 
-      {/* <div className={css.box}>
+      <div className={css.box}>
         <ConfirmedMatches checkMatch={setConfirmedMatch} user={user} />
-      </div> */}
+      </div>
       <div className={css.box}>
         <EventsBlock checkInvites={setInvites} user={user} />
       </div>

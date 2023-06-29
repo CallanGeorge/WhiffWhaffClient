@@ -43,7 +43,7 @@ const MatchPage = () => {
         `http://localhost:8080/api/v1/result/${id}`,
         {
           vote: data!.player1,
-          user: user?.name,
+          user: user?.email,
         },
         {
           withCredentials: true,
@@ -60,7 +60,7 @@ const MatchPage = () => {
         `http://localhost:8080/api/v1/result/${id}`,
         {
           vote: data!.player2,
-          user: user?.name,
+          user: user?.email,
         },
         {
           withCredentials: true,

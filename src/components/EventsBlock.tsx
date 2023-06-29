@@ -15,8 +15,9 @@ const EventsBlock = ({ checkInvites, user }: props) => {
   const [matches, setMatches] = useState<match[]>([]);
 
   useEffect(() => {
+    console.log(user);
     axios
-      .get(`http://localhost:8080/api/v1/invites/${user?.name}`, {
+      .get(`http://localhost:8080/api/v1/invites/${user?.email}`, {
         withCredentials: true,
         //@ts-ignore
         origin: "http://localhost:8080",
@@ -41,6 +42,7 @@ const EventsBlock = ({ checkInvites, user }: props) => {
     );
   };
 
+  console.log(matches);
   return (
     <>
       {" "}
@@ -55,13 +57,9 @@ const EventsBlock = ({ checkInvites, user }: props) => {
                 <span>{m!.player1}</span> <span>challenged</span>{" "}
                 <span>{m!.player2}</span>
               </div>
-              <div
-                className={
-                  m!.accepted === "ACCEPTED" ? css.accepted : css.pending
-                }
-              >
+              <div className={m!.response === 1 ? css.accepted : css.pending}>
                 pending
-                {user?.name === m!.player2 && m!.accepted === "PENDING" && (
+                {user?.email === m?.player2 && m?.response === 0 && (
                   <button
                     id={m!.id}
                     type="button"

@@ -6,6 +6,6 @@ export interface match {
   player2Voted: boolean;
   player1Vote: string;
   player2Vote: string;
-  accepted: string;
+  response: Number;
   winner: string;
 }
