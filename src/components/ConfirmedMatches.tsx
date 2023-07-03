@@ -43,7 +43,11 @@ const ConfirmedMatches = ({ checkMatch, user }: props) => {
                 <span>{m!.player1}</span> <span>challenged</span>{" "}
                 <span>{m!.player2}</span>
               </div>
-              <div className={m!.response === 1 ? css.accepted : css.pending}>
+              <div
+                className={
+                  m!.response === "ACCEPTED" ? css.accepted : css.pending
+                }
+              >
                 <button type="button">
                   <Link to={`/match/${m!.id}`}>I have played this game</Link>{" "}
                 </button>

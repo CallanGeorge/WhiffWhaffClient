@@ -57,9 +57,13 @@ const EventsBlock = ({ checkInvites, user }: props) => {
                 <span>{m!.player1}</span> <span>challenged</span>{" "}
                 <span>{m!.player2}</span>
               </div>
-              <div className={m!.response === 1 ? css.accepted : css.pending}>
+              <div
+                className={
+                  m!.response === "ACCEPTED" ? css.accepted : css.pending
+                }
+              >
                 pending
-                {user?.email === m?.player2 && m?.response === 0 && (
+                {user?.email === m?.player2 && m?.response === "PENDING" && (
                   <button
                     id={m!.id}
                     type="button"
