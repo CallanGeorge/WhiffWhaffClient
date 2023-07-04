@@ -15,7 +15,6 @@ const EventsBlock = ({ checkInvites, user }: props) => {
   const [matches, setMatches] = useState<match[]>([]);
 
   useEffect(() => {
-    console.log(user);
     axios
       .get(`http://localhost:8080/api/v1/invites/${user?.email}`, {
         withCredentials: true,
@@ -25,6 +24,7 @@ const EventsBlock = ({ checkInvites, user }: props) => {
       .then((response) => {
         setMatches(response.data);
         checkInvites(response.data);
+        console.log(response.data);
       });
   }, [user]);
 

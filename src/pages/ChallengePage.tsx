@@ -23,7 +23,9 @@ export const ChallengePage = () => {
 
   const { username } = useParams();
 
-  const date = `${year}-${month! < 10 ? `0${month}` : month}-${day}`;
+  const date = `${year}-${month! < 10 ? `0${month}` : month}-${
+    day! < 10 ? `0${day}` : day
+  }`;
 
   useEffect(() => {
     axios
