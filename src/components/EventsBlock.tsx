@@ -26,6 +26,22 @@ const EventsBlock = ({ checkInvites, user }: props) => {
         checkInvites(response.data);
         console.log(response.data);
       });
+
+    // FIGURE OUT HOW TO MAKE THIS RUN PROPERLY
+
+    matches &&
+      matches.map((match) => {
+        axios.get(
+          `http://localhost:8080/api/v1/check/${match?.id}/${match?.player1}/${match?.player2}`,
+          {
+            withCredentials: true,
+            //@ts-ignore
+            origin: "http://localhost:8080",
+          }
+        );
+      });
+
+    console.log("feet");
   }, [user]);
 
   const handleAccept = (e: any) => {
