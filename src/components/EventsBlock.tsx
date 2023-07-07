@@ -40,8 +40,6 @@ const EventsBlock = ({ checkInvites, user }: props) => {
           }
         );
       });
-
-    console.log("feet");
   }, [user]);
 
   const handleAccept = (e: any) => {
