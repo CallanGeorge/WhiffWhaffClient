@@ -16,7 +16,7 @@ const Modal = () => {
     if (scrollContainer) {
       scrollContainer.scrollTop = scrollContainer.scrollHeight;
     }
-  }, [conversation]);
+  }, [conversation, isOpen]);
 
   const handleOpen = () => {
     isOpen === false ? setOpen(true) : setOpen(false);
