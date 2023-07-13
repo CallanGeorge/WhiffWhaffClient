@@ -34,9 +34,13 @@ const Modal = () => {
         question: question,
       })
       .then((res) => {
-        setResponse(res.data);
+        console.log(res);
+        setResponse(res.data.answer);
         //@ts-ignore
-        setConversation((prevConversation) => [...prevConversation, res.data]);
+        setConversation((prevConversation) => [
+          ...prevConversation,
+          res.data.answer,
+        ]);
         setQuestion("");
         setIsDisabled(false);
       });
