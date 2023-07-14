@@ -30,9 +30,12 @@ const Modal = () => {
     setConversation((prevConversation) => [...prevConversation, question]);
 
     axios
-      .post("http://127.0.0.1:5000/api/answer", {
-        question: question,
-      })
+      .post(
+        "https://wqwofk2jyb.execute-api.eu-north-1.amazonaws.com/default/WhiffWhaffAnswer",
+        {
+          question: question,
+        }
+      )
       .then((res) => {
         console.log(res);
         setResponse(res.data.answer);
