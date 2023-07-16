@@ -9,6 +9,7 @@ const Modal = () => {
   const [response, setResponse] = useState<string>();
   const [conversation, setConversation] = useState<string[]>([]);
   const [isDisabled, setIsDisabled] = useState<boolean>(false);
+  const [userEmail, setUserEmail] = useState<string>();
 
   const scrollContainerRef = useRef<HTMLDivElement | null>(null);
   useEffect(() => {
@@ -25,28 +26,43 @@ const Modal = () => {
   const handleSubmit = (e: any) => {
     e.preventDefault();
     setIsDisabled(true);
+    const emailRegex = /[\w.-]+@[\w.-]+\.[\w.-]+/;
 
     //@ts-ignore
     setConversation((prevConversation) => [...prevConversation, question]);
+    let extractedEmail = null;
+    //@ts-ignore
+    extractedEmail = question.match(emailRegex);
 
-    axios
-      .post(
-        "https://wqwofk2jyb.execute-api.eu-north-1.amazonaws.com/default/WhiffWhaffAnswer",
-        {
-          question: question,
-        }
-      )
-      .then((res) => {
-        console.log(res);
-        setResponse(res.data.answer);
-        //@ts-ignore
-        setConversation((prevConversation) => [
-          ...prevConversation,
-          res.data.answer,
-        ]);
-        setQuestion("");
-        setIsDisabled(false);
-      });
+    if (extractedEmail) {
+      setResponse("Thank you for providing your email!");
+      setUserEmail(extractedEmail[0]);
+      //@ts-ignore
+      setConversation((prevConversation) => [
+        ...prevConversation,
+        "Thank you for providing your email!",
+      ]);
+      setQuestion("");
+      setIsDisabled(false);
+    } else {
+      axios
+        .post(
+          "https://wqwofk2jyb.execute-api.eu-north-1.amazonaws.com/default/WhiffWhaffAnswer",
+          {
+            question: question,
+          }
+        )
+        .then((res) => {
+          setResponse(res.data.answer);
+          //@ts-ignore
+          setConversation((prevConversation) => [
+            ...prevConversation,
+            res.data.answer,
+          ]);
+          setQuestion("");
+          setIsDisabled(false);
+        });
+    }
   };
 
   if (!isOpen) {
