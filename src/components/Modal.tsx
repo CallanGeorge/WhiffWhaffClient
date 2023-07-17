@@ -29,7 +29,7 @@ const Modal = () => {
     if (extractedEmail) {
       setResponse("Thank you for providing your email!");
       setUserEmail(extractedEmail[0]);
-      return extractedEmail;
+      return extractedEmail[0];
     }
 
     return null;
@@ -44,11 +44,11 @@ const Modal = () => {
 
     //@ts-ignore
     let email = emailCheck(question);
+    console.log(email);
 
     axios
       .post(
-        // "https://wqwofk2jyb.execute-api.eu-north-1.amazonaws.com/default/WhiffWhaffAnswer",
-        "http://127.0.0.1:5000/api/answer",
+        "https://y3s1oh1n3k.execute-api.eu-north-1.amazonaws.com/default/chatbot-answer",
         {
           question: question,
           email: email,
