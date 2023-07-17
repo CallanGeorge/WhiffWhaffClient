@@ -23,46 +23,48 @@ const Modal = () => {
     isOpen === false ? setOpen(true) : setOpen(false);
   };
 
-  const handleSubmit = (e: any) => {
-    e.preventDefault();
-    setIsDisabled(true);
+  const emailCheck = (question: string) => {
     const emailRegex = /[\w.-]+@[\w.-]+\.[\w.-]+/;
-
-    //@ts-ignore
-    setConversation((prevConversation) => [...prevConversation, question]);
-    let extractedEmail = null;
-    //@ts-ignore
-    extractedEmail = question.match(emailRegex);
-
+    let extractedEmail = question.match(emailRegex);
     if (extractedEmail) {
       setResponse("Thank you for providing your email!");
       setUserEmail(extractedEmail[0]);
-      //@ts-ignore
-      setConversation((prevConversation) => [
-        ...prevConversation,
-        "Thank you for providing your email!",
-      ]);
-      setQuestion("");
-      setIsDisabled(false);
-    } else {
-      axios
-        .post(
-          "https://wqwofk2jyb.execute-api.eu-north-1.amazonaws.com/default/WhiffWhaffAnswer",
-          {
-            question: question,
-          }
-        )
-        .then((res) => {
-          setResponse(res.data.answer);
-          //@ts-ignore
-          setConversation((prevConversation) => [
-            ...prevConversation,
-            res.data.answer,
-          ]);
-          setQuestion("");
-          setIsDisabled(false);
-        });
+      return extractedEmail;
     }
+
+    return null;
+  };
+
+  const handleSubmit = (e: any) => {
+    e.preventDefault();
+    setIsDisabled(true);
+
+    //@ts-ignore
+    setConversation((prevConversation) => [...prevConversation, question]);
+
+    //@ts-ignore
+    let email = emailCheck(question);
+
+    axios
+      .post(
+        // "https://wqwofk2jyb.execute-api.eu-north-1.amazonaws.com/default/WhiffWhaffAnswer",
+        "http://127.0.0.1:5000/api/answer",
+        {
+          question: question,
+          email: email,
+          conversation: [...conversation, question],
+        }
+      )
+      .then((res) => {
+        setResponse(res.data.answer);
+        //@ts-ignore
+        setConversation((prevConversation) => [
+          ...prevConversation,
+          res.data.answer,
+        ]);
+        setQuestion("");
+        setIsDisabled(false);
+      });
   };
 
   if (!isOpen) {
