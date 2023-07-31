@@ -1,0 +1,13 @@
+.buttonContainer {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 15px;
+}
+
+.buttonPlaque {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: green;
+}
